@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/*
+  Дизайн-система v1 (черновик) — светлая база + один акцентный цвет.
+  Решение по TECH_SPEC.md: "выбрать один вариант, не смешивать тёмную и светлую тему
+  без явного запроса" — здесь зафиксирован светлый вариант, автоматического dark mode нет.
+*/
+:root {
+  --background: #fafafa;
+  --foreground: #16171a;
+  --muted: #6e6e76;
+  --border: #e5e5ea;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Типографика: диапазон H1 48-96px, остальные ступени — по спецификации TECH_SPEC.md */
+  --text-hero: clamp(3rem, 1.5rem + 4vw, 6rem);
+  --text-h1: clamp(2.25rem, 1.5rem + 2vw, 3.5rem);
+  --text-h2: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-body-lg: 1.25rem;
+  --text-body: 1.125rem;
+  --text-small: 0.9375rem;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
