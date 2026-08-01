@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 /*
-  Дизайн-система v1 (черновик) — светлая база + один акцентный цвет.
-  Решение по TECH_SPEC.md: "выбрать один вариант, не смешивать тёмную и светлую тему
-  без явного запроса" — здесь зафиксирован светлый вариант, автоматического dark mode нет.
+  Дизайн-система v3 — тёплый editorial-вариант (выбранное направление).
+  Тёплая "бумажная" база вместо холодного белого/индиго, серифный заголовок для
+  крупных заявлений, терракотовый акцент. Решение по TECH_SPEC.md: "выбрать один
+  вариант, не смешивать тёмную и светлую тему без явного запроса" — база светлая,
+  без dark mode.
 */
 :root {
-  --background: #fafafa;
-  --foreground: #16171a;
-  --muted: #6e6e76;
-  --border: #e5e5ea;
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
+  --background: #f6f3ee;
+  --foreground: #2b2622;
+  --muted: #8a8072;
+  --border: #e4dccf;
+  --surface: #ffffff;
+  --accent: #b5502c;
+  --accent-hover: #9c4324;
   --accent-foreground: #ffffff;
 }
 
@@ -20,12 +23,14 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-surface: var(--surface);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 
   /* Типографика: диапазон H1 48-96px, остальные ступени — по спецификации TECH_SPEC.md */
   --text-hero: clamp(3rem, 1.5rem + 4vw, 6rem);
