@@ -328,26 +328,39 @@ AI не может:
 
 ## 19. Структура репозитория
 
+`/content/posts` и `/content/pages` уже заняты сайтом (см. TECH_SPEC.md) — это то, что напрямую
+рендерит Next.js, по упрощённой схеме фронтматтера (без `id`/`pillar`/`status` и т.д.). Пайплайн
+этого документа живёт в отдельном каталоге `/media/`, чтобы не смешивать рабочие черновики с
+опубликованным на сайте контентом:
+
 ```text
 /
 ├── CLAUDE.md
-├── BRAND.md
-├── MEDIA_ARCHITECTURE.md
-├── CONTENT_OS.md
-├── CHANNELS.md
-├── EDITORIAL_GUIDE.md
-├── ECOSYSTEM.md
-├── content/
-│   ├── inbox/
-│   ├── backlog/
-│   ├── drafts/
-│   ├── canonical/
-│   ├── published/
-│   └── archive/
-├── research/
-├── assets/
-└── analytics/
+├── docs/
+│   ├── BRAND.md
+│   ├── MEDIA_ARCHITECTURE.md
+│   ├── CONTENT_OS.md
+│   ├── CHANNELS.md
+│   ├── EDITORIAL_GUIDE.md
+│   └── ECOSYSTEM.md
+├── content/            # сайт — canonical output для Next.js (TECH_SPEC.md)
+│   ├── posts/
+│   └── pages/
+└── media/              # редакционный пайплайн для всех каналов
+    ├── inbox/
+    ├── backlog/
+    ├── drafts/
+    ├── canonical/
+    ├── published/
+    ├── archive/
+    ├── research/
+    ├── assets/
+    └── analytics/
 ```
+
+Когда материал в `media/canonical` готов и предназначен для сайта, из него собирается файл в
+`content/posts/` с фронтматтером по TECH_SPEC.md — расширенные поля (`id`, `pillar`,
+`canonical_channel`, `thesis`, `sensitivity` и т.д.) остаются в `media/`, на сайт не переносятся.
 
 ## 20. Front matter
 

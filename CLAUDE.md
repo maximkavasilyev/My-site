@@ -4,12 +4,24 @@
 > Здесь — краткая выжимка. Полная логика в ARCHITECTURE.md, TECH_SPEC.md, CONTENT_GUIDE.md.
 > Next.js-специфичные заметки (версия, breaking changes) — в AGENTS.md, прочитать перед
 > написанием кода на Next.js API.
+> Канон персонального медиа (все каналы, не только сайт) — в docs/BRAND.md,
+> docs/MEDIA_ARCHITECTURE.md, docs/CONTENT_OS.md, docs/CHANNELS.md, docs/EDITORIAL_GUIDE.md,
+> docs/ECOSYSTEM.md, docs/MEDIA_CLAUDE.md — читать перед задачами по контенту/медиа-стратегии,
+> вне зависимости от того, идёт ли речь о сайте.
 
 ## Что это за проект
 
-Личный сайт Максима — разработчика, архитектора систем, AI-специалиста, предпринимателя.
-**Не блог ради блога.** Сайт — точка входа верхнего уровня воронки: узнаваемость эксперта →
-переход подписчиков/клиентов на два продукта: **Pro-leads** и **Tender Audit**.
+Репозиторий объединяет две вещи:
+
+1. **Сайт Максима** — разработчика, архитектора систем, AI-специалиста, предпринимателя.
+   **Не блог ради блога.** Сайт — точка входа верхнего уровня воронки: узнаваемость эксперта →
+   переход подписчиков/клиентов на два продукта: **Pro-leads** и **Tender Audit**. Правила сайта
+   как продукта/кода — этот файл + ARCHITECTURE.md + TECH_SPEC.md, они приоритетны при любом
+   конфликте формулировок о самом сайте.
+2. **Канон персонального медиа** — единая система позиционирования и контент-операций для всех
+   каналов (сайт, Telegram, YouTube, Дзен, LinkedIn, VK и т.д.), см. docs/MEDIA_CLAUDE.md и
+   связанные доки. Сайт — один из каналов этой системы, но не единственный и не хранит их рабочий
+   контур (черновики, inbox и т.п. — в `/media/`, не в `/content/`).
 
 ## Стек
 
@@ -41,7 +53,11 @@
 ## Структура репозитория (ожидаемая)
 
 ```
-/content/posts/       — markdown-посты (продуктовые и экспертные)
-/content/pages/        — статика: about, projects, contact
-/docs/                 — ARCHITECTURE.md, TECH_SPEC.md, CONTENT_GUIDE.md, ROADMAP.md
+/content/posts/        — markdown-посты сайта (продуктовые и экспертные), схема — TECH_SPEC.md
+/content/pages/         — статика сайта: about, projects, contact
+/media/                 — редакционный пайплайн для всех каналов (inbox → ... → published),
+                          схема и статусы — docs/CONTENT_OS.md
+/docs/                  — ARCHITECTURE.md, TECH_SPEC.md, CONTENT_GUIDE.md, ROADMAP.md +
+                          медиа-канон: BRAND.md, MEDIA_ARCHITECTURE.md, CONTENT_OS.md,
+                          CHANNELS.md, EDITORIAL_GUIDE.md, ECOSYSTEM.md, MEDIA_CLAUDE.md
 ```
