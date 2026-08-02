@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import PostTypeTag from "../../components/PostTypeTag";
@@ -18,9 +17,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug).catch(() => null);
-
-  if (!post) return {};
+  const post = await getPostBySlug(slug);
 
   return {
     title: `${post.title} — Максим`,
@@ -34,15 +31,13 @@ export default async function BlogPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug).catch(() => null);
-
-  if (!post) notFound();
+  const post = await getPostBySlug(slug);
 
   return (
     <>
       <Header />
 
-      <main className="flex-1 bg-background text-foreground">
+      <main id="main-content" className="flex-1 bg-background text-foreground">
         <ScrollReveal>
           <section className="mx-auto max-w-5xl px-6 py-24 sm:px-10 sm:py-32">
             <PostTypeTag type={post.type} />
