@@ -9,7 +9,7 @@ export default function PostCard({ post }: { post: PostMeta }) {
       className="block rounded-2xl border border-border bg-surface p-8 transition hover:-translate-y-0.5 hover:border-foreground"
     >
       <PostTypeTag type={post.type} />
-      <p className="mt-4 text-h3 font-semibold leading-snug">{post.title}</p>
+      <h3 className="mt-4 text-h3 font-semibold leading-snug">{post.title}</h3>
       <p className="mt-3 text-body text-muted">{post.summary}</p>
     </Link>
   );

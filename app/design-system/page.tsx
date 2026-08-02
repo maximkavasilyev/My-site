@@ -23,7 +23,7 @@ export default function DesignSystemPreview() {
     <>
       <Header />
 
-      <main className="flex-1 bg-background text-foreground">
+      <main id="main-content" className="flex-1 bg-background text-foreground">
         <ScrollReveal>
           <section className="mx-auto max-w-5xl px-6 py-24 sm:px-10 sm:py-32">
             <p className="text-small uppercase tracking-widest text-muted">
@@ -116,9 +116,9 @@ export default function DesignSystemPreview() {
             <h2 className="text-h2 font-semibold tracking-tight">Карточка поста</h2>
             <div className="mt-10 max-w-sm rounded-2xl border border-border bg-surface p-8 transition hover:-translate-y-0.5 hover:border-foreground">
               <PostTypeTag type="product" />
-              <p className="mt-4 text-h3 font-semibold leading-snug">
+              <h3 className="mt-4 text-h3 font-semibold leading-snug">
                 Государственные закупки как источник B2B-клиентов
-              </p>
+              </h3>
               <p className="mt-3 text-body text-muted">
                 Как данные о завершённых закупках помогают находить компании с
                 подтверждённым спросом и финансированием.
