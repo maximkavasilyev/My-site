@@ -1,0 +1,26 @@
+# Пример nginx-конфига для статического экспорта (out/), под trailingSlash: true
+# из next.config.ts. Заменить server_name на реальный домен при деплое
+# (см. docs/ROADMAP.md, "Незакрытые вопросы" — домен ещё не куплен).
+#
+# Деплой: скопировать содержимое out/ (после `npm run build`) в root ниже,
+# например /var/www/my-site/out.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name example.com; # заменить на реальный домен
+
+    root /var/www/my-site/out;
+    index index.html;
+
+    # trailingSlash: true -> каждый роут это /route/index.html,
+    # try_files сначала ищет точный файл, потом директорию с index.html
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+}

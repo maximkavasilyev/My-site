@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // витрина дизайн-системы — референс для разработки, не публичная страница
-      disallow: "/design-system",
+      disallow: "/design-system/",
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

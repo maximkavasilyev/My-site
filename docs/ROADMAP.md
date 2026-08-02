@@ -77,7 +77,12 @@
 - ~~Способ деплоя на VPS~~ — решено: статический экспорт (`output: "export"` в
   next.config.ts). Сайт не использует API-роуты, middleware, next/image — только markdown
   из репозитория и Server Components, рендерящиеся в HTML на билде. VPS на nginx (или любом
-  статик-сервере) без Node-процесса; пример конфига — в доке Next.js "static-exports".
+  статик-сервере) без Node-процесса.
   `SITE_URL` в `lib/site.ts` — плейсхолдер `https://example.com` до покупки домена, используется
   в `sitemap.xml`/`robots.txt`/`metadataBase`; заменить при деплое (через `NEXT_PUBLIC_SITE_URL`
   или прямо в файле).
+- ~~Deployment-контракт (trailingSlash + nginx routing)~~ — решено: `trailingSlash: true` в
+  next.config.ts (каждый роут — `/route/index.html`, простейший `try_files $uri $uri/ =404`,
+  без угадывания `.html`-расширений). `next/link` сам расставляет trailing slash во внутренних
+  ссылках, править компоненты не пришлось. Рабочий пример конфига — `deploy/nginx.conf.example`
+  (заменить `server_name` на реальный домен и путь `root` при деплое).
