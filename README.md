@@ -17,8 +17,9 @@ Personal authority hub: разработчик, архитектор систе�
 
 ## Стек
 
-Next.js (App Router) + Tailwind CSS. Контент — Markdown-файлы в `content/posts/` и
-`content/pages/`, без CMS. Деплой — на VPS.
+Next.js (App Router), статический экспорт (`output: "export"`) + Tailwind CSS. Контент —
+Markdown-файлы в `content/posts/` и `content/pages/`, без CMS. Деплой — на VPS через nginx,
+без Node-процесса (пример конфига — `deploy/nginx.conf.example`).
 
 ## Разработка
 
@@ -29,6 +30,14 @@ npm run dev
 
 Открыть [http://localhost:3000](http://localhost:3000).
 
-`app/page.tsx` — Главная страница (готова). Витрина токенов дизайн-системы переехала на
-`/design-system` (референс для разработки, вне навигации). Дальше по порядку — Обо мне →
-Проекты → Блог → Контакты, см. `docs/ROADMAP.md`.
+Продакшн-сборка и локальный просмотр статического экспорта:
+
+```bash
+npm run build   # -> out/
+npm run start   # поднимает out/ как статик-сервер (npx serve)
+```
+
+Все 5 страниц сайта готовы: Главная (`/`), Обо мне (`/about`), Проекты (`/projects`),
+Блог (`/blog`, `/blog/[slug]`), Контакты (`/contact`) — текущее состояние см.
+`docs/ROADMAP.md`. Витрина токенов дизайн-системы — на `/design-system` (референс для
+разработки, вне навигации и вне индексации).

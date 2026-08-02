@@ -30,7 +30,6 @@
   --color-accent-foreground: var(--accent-foreground);
 
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
 
   /* Типографика: диапазон H1 48-96px, остальные ступени — по спецификации TECH_SPEC.md */
