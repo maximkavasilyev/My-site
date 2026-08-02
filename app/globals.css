@@ -10,7 +10,8 @@
 :root {
   --background: #f6f3ee;
   --foreground: #2b2622;
-  --muted: #8a8072;
+  /* #6b6255 вместо #8a8072 — контраст ~5.4:1 на фоне, проходит WCAG AA для основного текста */
+  --muted: #6b6255;
   --border: #e4dccf;
   --surface: #ffffff;
   --accent: #b5502c;
@@ -46,4 +47,102 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Скролл-reveal: включается через ScrollReveal (IntersectionObserver), см. app/components. */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes mobile-nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav-enter {
+  animation: mobile-nav-in 300ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .mobile-nav-enter {
+    animation: none;
+  }
+}
+
+/* Тело поста — цитаты, списки, подзаголовки внутри markdown-контента */
+.prose {
+  color: var(--color-foreground);
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin-top: 1.5em;
+  max-width: 65ch;
+  line-height: 1.75;
+}
+
+.prose h2 {
+  margin-top: 2.5em;
+  font-size: var(--text-h3);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.prose ul,
+.prose ol {
+  margin-top: 1.5em;
+  padding-left: 1.25rem;
+  line-height: 1.75;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+.prose blockquote {
+  margin: 2em 0;
+  max-width: 60ch;
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: var(--text-body-lg);
+  font-style: italic;
+  line-height: 1.6;
 }
