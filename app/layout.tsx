@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,6 +20,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Максим — разработчик, архитектор систем, AI-специалист",
   description:
     "Личный сайт Максима: экспертиза в разработке, архитектуре систем и AI — с переходом на Pro-leads и Tender Audit.",
