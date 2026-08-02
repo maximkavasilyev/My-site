@@ -19,9 +19,10 @@
 1. `BRAND.md`
 2. `MEDIA_ARCHITECTURE.md`
 3. `CONTENT_OS.md`
-4. `EDITORIAL_GUIDE.md`
-5. `ECOSYSTEM.md`
-6. документы конкретного продукта, если материал связан с ним.
+4. `CHANNELS.md`
+5. `EDITORIAL_GUIDE.md`
+6. `ECOSYSTEM.md`
+7. документы конкретного продукта, если материал связан с ним.
 
 ## Жёсткие правила
 
