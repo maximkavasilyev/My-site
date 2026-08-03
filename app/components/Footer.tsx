@@ -21,6 +21,9 @@ export default function Footer() {
           <Link href="#" className="text-muted transition-colors hover:text-foreground">
             Tender Audit
           </Link>
+          <a href="/rss.xml" className="text-muted transition-colors hover:text-foreground">
+            RSS
+          </a>
         </div>
       </div>
     </footer>
