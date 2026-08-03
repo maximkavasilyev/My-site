@@ -52,3 +52,16 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com npm run build
 
 Без неё в HTML не попадает ни один сторонний скрипт. Plausible — отправная точка, замена
 провайдера — это только один файл.
+
+## Тесты
+
+E2e (Playwright) — навигация, блог/CTA, мобильное меню, 404, SEO-артефакты
+(`sitemap.xml`/`robots.txt`/`rss.xml`/OG). Гоняются против реального статического экспорта
+(`npm run build` + `npm run start`), не `next dev`:
+
+```bash
+npx playwright install --with-deps chromium   # один раз
+npm run test:e2e
+```
+
+В CI (`.github/workflows/ci.yml`) — обязательный шаг на каждый push/PR.
