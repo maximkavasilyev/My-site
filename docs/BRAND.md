@@ -151,3 +151,23 @@
 - не смешивает разные продукты;
 - не создаёт ложных ожиданий;
 - усиливает понимание того, что Максим строит и как принимает решения.
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+Maxim is a solo entrepreneur, developer, systems and product architect, and AI specialist. The public site is a static personal expert site with Markdown content. Pro-leads and Tender Audit are separate products. Custom client development is not the primary business model.
+
+### Approved direction
+
+Trust begins with Maxim's name and expertise. An independent platform may emerge alongside the personal brand without hiding the author prematurely. The initial paying segment is a solo entrepreneur combining business, product development, and AI. The site and media may form an independent commercial branch through paid materials, research, ideas, and later proven tools. Facts, sources, experience, conclusions, and hypotheses must be separated.
+
+### Future / Gate
+
+Validate one paid material before defining a product line, account, or platform. A platform brand, subscription, community, marketplace, and native applications each require evidence and a Gate decision.
+
+### Out of scope
+
+No brand rename, agency launch, commerce implementation, website change, or product merger is authorized.

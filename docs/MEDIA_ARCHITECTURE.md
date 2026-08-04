@@ -189,3 +189,23 @@
 - не превращать все материалы в рекламу;
 - не добавлять площадки ради присутствия;
 - не создавать отдельные бренды без устойчивой причины.
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The static website holds published Markdown material. Telegram and other external platforms are distribution surfaces; Pro-leads and Tender Audit are separate product contexts.
+
+### Approved direction
+
+The website is the canonical, long-lived source of Maxim's content and research. Channels receive adapted material, excerpts, native posts, or context-appropriate links rather than mechanical copies. The strategic content model is `note`, `article`, `case`, `research`, `product material`, and `paid material`; it supersedes `expert | product` as a complete long-term model. Paid material may combine research, analysis, interpretation, recommendations, and an action plan. The free layer is useful on its own; the paid layer adds depth, data, conclusions, practical steps, templates, appendices, or structured guidance. Primary metrics are return visits, subscriptions, registrations, purchase intent, purchases, repeat purchases, use of purchased access, and meaningful discussions.
+
+### Future / Gate
+
+Start with one manually sold and delivered material and one-time purchases. Bundles require several materials; subscription requires proven recurring value and repeat demand. A Research section and commercial delivery remain Gate-bound.
+
+### Out of scope
+
+No checkout, account, CMS, automatic syndication, or new content route is created.

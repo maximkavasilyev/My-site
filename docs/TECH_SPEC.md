@@ -99,3 +99,23 @@ cta_quote: "Текст CTA-цитаты"   # обязательно при type:
 - Мультиязычность
 - CMS/админ-панель
 - Автоматическую синхронизацию с соцсетями (RSS/API-подтяжку контента)
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The implemented technical contract remains Next.js App Router, static export, Tailwind CSS, repository Markdown, and static nginx/VPS serving without a Node application process. There is no database, auth, payment, account, comments, CMS, backend application runtime, API, Server Action, worker, or queue. The existing page, route, and front-matter specifications remain current implementation facts.
+
+### Approved direction
+
+The strategic content model can expand conceptually beyond `expert | product`, without changing this current build contract. If a commercial backend becomes justified, its target is a modular monolith with separate public and authenticated boundaries; provider choice, data model, access rules, payments, and deployment require a new technical specification and ADR.
+
+### Future / Gate
+
+Only after Gate 2 commercial validation may Gate 3 scope be separately authorized: free registration, individual one-time purchase, purchased-material access, and a minimal account containing purchases, available materials, and access state. Saved content, comments, tools, personalization, community, marketplace, subscription, PWA, Telegram Mini App, and native apps are later evidence-driven decisions.
+
+### Out of scope
+
+No configuration, dependency, route, application code, provider, backend, or current Markdown front-matter implementation is changed.

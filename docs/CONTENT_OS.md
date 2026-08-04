@@ -404,3 +404,23 @@ sensitivity: public
 - AI не размывает голос автора;
 - контент создаёт накопительный актив;
 - медиа не мешает разработке и бизнесу.
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+Published site content is Markdown in `content/`; editorial work stays separate. The implemented front matter remains the current build contract and is not changed by this task.
+
+### Approved direction
+
+Use the operating path: capture > triage > research > choose `note`, `article`, `case`, `research`, `product material`, or `paid material` > draft > evidence review > useful free layer > paid layer only when commercially validated > publish canonically on the website > adapt for channels > measure > update or archive. Mark fact, source, experience, conclusion, hypothesis, limits, version, and date of currency. A future conceptual model may track content type, audience route, access, related product, version, and related materials; it does not change current front matter.
+
+### Future / Gate
+
+The first paid result is manually sold and delivered. Buyers keep access to the purchased version; included updates must be explicit and major editions may be separate purchases. Automation, a paid access model, account, and retention tools require the relevant Gate and a separate technical decision.
+
+### Out of scope
+
+No content implementation, front-matter schema, `/content/` article, CMS, payment flow, or account is changed.

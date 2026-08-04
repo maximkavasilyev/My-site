@@ -72,3 +72,23 @@
 ## Архитектурные изменения
 
 Если задача противоречит канону, остановиться и сообщить об этом. Не менять правила точечно под один пост или текущий тренд.
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The public website renders Markdown content statically; media channels remain separate distribution surfaces. No paid access, account, or community mechanism exists.
+
+### Approved direction
+
+The website is the canonical source for long-lived content and research. Plan materials as `note`, `article`, `case`, `research`, `product material`, or `paid material`; distinguish facts, sources, experience, conclusions, and hypotheses. Adapt channel material rather than copying it mechanically. Free material must provide standalone value; paid material adds depth or practical utility.
+
+### Future / Gate
+
+Validate one paid material manually before commerce implementation. Later registration is for purchases and access first; saved content, comments, tools, personalization, community, marketplace, and subscription require demonstrated demand and their relevant Gate.
+
+### Out of scope
+
+Do not publish, automate, create routes, alter content files, or implement checkout, account, community, marketplace, Telegram Mini App, or native applications under this documentation task.

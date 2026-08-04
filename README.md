@@ -41,3 +41,21 @@ npm run start   # поднимает out/ как статик-сервер (npx 
 Блог (`/blog`, `/blog/[slug]`), Контакты (`/contact`) — текущее состояние см.
 `docs/ROADMAP.md`. Витрина токенов дизайн-системы — на `/design-system` (референс для
 разработки, вне навигации и вне индексации).
+
+## Notion Canon v2
+
+### Current
+
+This is a static Next.js App Router site with repository Markdown and no database, auth, payments, account, comments, CMS, or backend runtime.
+
+### Approved direction
+
+It is Maxim's expert and authority hub, canonical content/research source, contextual link to the separate Pro-leads and Tender Audit products, and a future independent commercial branch�not only a traffic funnel.
+
+### Future / Gate
+
+One paid material is validated manually before any commerce backend. Only after about 5�10 target-user payments and clear purchase reasons may a separately authorized minimal account-and-purchase layer be considered. See `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, and `docs/adr/0001-notion-canon-v2-gated-website-evolution.md`.
+
+### Out of scope
+
+No commercial, account, community, marketplace, Telegram Mini App, native-app, or code implementation is included in this documentation synchronization.
