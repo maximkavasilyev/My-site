@@ -9,7 +9,9 @@
 - **Фреймворк:** Next.js, App Router.
 - **Режим:** статический экспорт — `output: "export"`.
 - **Маршрутизация:** `trailingSlash: true`.
-- **Хостинг:** собственный VPS, nginx, без постоянного Node.js application process.
+- **Production URL:** `https://maxightai.ru`.
+- **Хостинг:** собственный VPS с nginx, без постоянного Node.js application process.
+- **Деплой:** GitHub Actions после успешных lint, build и e2e при push в `main` публикует статический экспорт на VPS.
 - **Контент:** Markdown-файлы в `/content/posts/` и `/content/pages/`.
 - **Стилизация:** Tailwind CSS.
 - **Язык:** русский, без i18n-инфраструктуры.

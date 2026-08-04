@@ -35,7 +35,7 @@ export default async function Projects() {
                   dangerouslySetInnerHTML={{ __html: project.contentHtml }}
                 />
                 <a
-                  href="#"
+                  href={project.url}
                   className="mt-8 inline-flex rounded-full bg-accent px-6 py-3 text-body font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
                 >
                   Перейти на {project.name} →

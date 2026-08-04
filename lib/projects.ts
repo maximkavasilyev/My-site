@@ -7,9 +7,15 @@ const PROJECTS_FILE = path.join(process.cwd(), "content/pages/projects.md");
 
 export type ProjectSlug = "pro-leads" | "tender-audit";
 
+export const PROJECT_URLS: Record<ProjectSlug, string> = {
+  "pro-leads": "https://pro-leads.ru",
+  "tender-audit": "https://tenderaudit.ru",
+};
+
 export type Project = {
   slug: ProjectSlug;
   name: string;
+  url: string;
   contentHtml: string;
 };
 
@@ -40,7 +46,7 @@ export async function getProjectsPage() {
 
       const processed = await remark().use(html).process(rest.join("\n").trim());
 
-      return { slug, name, contentHtml: processed.toString() } satisfies Project;
+      return { slug, name, url: PROJECT_URLS[slug], contentHtml: processed.toString() } satisfies Project;
     }),
   );
 

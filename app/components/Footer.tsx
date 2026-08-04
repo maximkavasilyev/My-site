@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PROJECT_URLS } from "@/lib/projects";
 
 export default function Footer() {
   return (
@@ -12,15 +12,15 @@ export default function Footer() {
         </div>
 
         <div className="flex gap-6 text-small">
-          <Link href="#" className="text-muted transition-colors hover:text-foreground">
+          <a href="https://t.me/maxightAI" className="text-muted transition-colors hover:text-foreground">
             Telegram
-          </Link>
-          <Link href="#" className="text-muted transition-colors hover:text-foreground">
+          </a>
+          <a href={PROJECT_URLS["pro-leads"]} className="text-muted transition-colors hover:text-foreground">
             Pro-leads
-          </Link>
-          <Link href="#" className="text-muted transition-colors hover:text-foreground">
+          </a>
+          <a href={PROJECT_URLS["tender-audit"]} className="text-muted transition-colors hover:text-foreground">
             Tender Audit
-          </Link>
+          </a>
           <a href="/rss.xml" className="text-muted transition-colors hover:text-foreground">
             RSS
           </a>
