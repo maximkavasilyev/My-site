@@ -1,25 +1,44 @@
 # Личный сайт Максима
 
-Personal authority hub: разработчик, архитектор систем, AI-специалист. Точка входа
-верхнего уровня воронки на два продукта — Pro-leads и Tender Audit.
+Статический экспертный сайт и основа персональной медиа-системы: контент, исследования, проекты и будущая коммерческая ветка по Gates.
 
-Перед началом работы над проектом читать в этом порядке:
+Сайт является:
 
-1. `CLAUDE.md` — краткие правила проекта
-2. `docs/ARCHITECTURE.md` — архитектура, воронка, структура сайта (Canon/SSoT)
-3. `docs/TECH_SPEC.md` — стек, дизайн-система, спецификация страниц и компонентов
-4. `docs/CONTENT_GUIDE.md` — правила контента и типизация постов
-5. `docs/ROADMAP.md` — текущий этап и план действий
+- личным authority hub;
+- каноническим источником долгоживущего контента;
+- контекстной точкой входа в отдельные продукты Pro-leads и Tender Audit;
+- базой для будущих платных материалов после коммерческой проверки.
 
-Для задач по контенту/медиа-стратегии (не только сайт) — дополнительно канон персонального медиа:
-`docs/BRAND.md`, `docs/MEDIA_ARCHITECTURE.md`, `docs/CONTENT_OS.md`, `docs/CHANNELS.md`,
-`docs/EDITORIAL_GUIDE.md`, `docs/ECOSYSTEM.md`, `docs/MEDIA_CLAUDE.md`.
+## Документация
 
-## Стек
+Перед изменениями читать:
 
-Next.js (App Router), статический экспорт (`output: "export"`) + Tailwind CSS. Контент —
-Markdown-файлы в `content/posts/` и `content/pages/`, без CMS. Деплой — на VPS через nginx,
-без Node-процесса (пример конфига — `deploy/nginx.conf.example`).
+1. `CLAUDE.md` — правила проекта;
+2. `AGENTS.md` — Next.js-специфичные инструкции;
+3. `docs/ARCHITECTURE.md` — роль системы, границы и Gates;
+4. `docs/TECH_SPEC.md` — текущий технический контракт;
+5. `docs/CONTENT_GUIDE.md` — правила материалов;
+6. `docs/ROADMAP.md` — этапы и условия переходов;
+7. `docs/adr/` — архитектурные решения.
+
+Медиа-канон:
+
+- `docs/BRAND.md`;
+- `docs/MEDIA_ARCHITECTURE.md`;
+- `docs/CONTENT_OS.md`;
+- `docs/CHANNELS.md`;
+- `docs/EDITORIAL_GUIDE.md`;
+- `docs/ECOSYSTEM.md`;
+- `docs/MEDIA_CLAUDE.md`.
+
+## Текущий стек
+
+- Next.js App Router;
+- Tailwind CSS;
+- статический экспорт — `output: "export"`;
+- Markdown в `content/posts/` и `content/pages/`;
+- nginx/VPS без постоянного Node.js application process;
+- без CMS, БД, auth, payments и backend API.
 
 ## Разработка
 
@@ -28,47 +47,45 @@ npm install
 npm run dev
 ```
 
-Открыть [http://localhost:3000](http://localhost:3000).
+Локальный адрес: `http://localhost:3000`.
 
-Продакшн-сборка и локальный просмотр статического экспорта:
+## Production build
 
 ```bash
-npm run build   # -> out/
-npm run start   # поднимает out/ как статик-сервер (npx serve)
+npm run build   # формирует out/
+npm run start   # поднимает out/ через статический сервер
 ```
 
-Все 5 страниц сайта готовы: Главная (`/`), Обо мне (`/about`), Проекты (`/projects`),
-Блог (`/blog`, `/blog/[slug]`), Контакты (`/contact`) — текущее состояние см.
-`docs/ROADMAP.md`. Витрина токенов дизайн-системы — на `/design-system` (референс для
-разработки, вне навигации и вне индексации).
+## Реализованные маршруты
 
-## Notion Canon v2
+- `/`;
+- `/about`;
+- `/projects`;
+- `/blog`;
+- `/blog/[slug]`;
+- `/contact`;
+- `/design-system` — внутренний неиндексируемый референс.
 
-### Current
+## Статические возможности
 
-This is a static Next.js App Router site with repository Markdown and no database, auth, payments, account, comments, CMS, or backend runtime.
+- RSS: `/rss.xml`;
+- sitemap и robots;
+- Open Graph изображения для главной и постов;
+- optional analytics component, выключенный без build-time переменной;
+- русский 404;
+- accessibility и mobile navigation.
 
-### Approved direction
-
-It is Maxim's expert and authority hub, canonical content/research source, contextual link to the separate Pro-leads and Tender Audit products, and a future independent commercial branch�not only a traffic funnel.
-
-### Future / Gate
-
-One paid material is validated manually before any commerce backend. Only after about 5�10 target-user payments and clear purchase reasons may a separately authorized minimal account-and-purchase layer be considered. See `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, and `docs/adr/0001-notion-canon-v2-gated-website-evolution.md`.
-
-### Out of scope
-
-No commercial, account, community, marketplace, Telegram Mini App, native-app, or code implementation is included in this documentation synchronization.
-
-## Static features and tests
-
-RSS (`/rss.xml`) and generated Open Graph images for the home page and posts are part of the static export. The optional analytics component is disabled unless its build-time environment variable is explicitly set; enabling any analytics provider requires a separate decision.
-
-Playwright E2E tests cover navigation, blog/CTA behavior, the mobile menu, Russian 404, RSS, sitemap, robots, and Open Graph output against the static export:
+## Тесты
 
 ```bash
 npx playwright install chromium
 npm run test:e2e
 ```
 
-CI runs lint, build, and E2E on every pull request and push to `main`.
+CI запускает lint, build и E2E для pull requests и push в `main`.
+
+## Архитектурное ограничение
+
+До Gate 2 коммерческий backend не создаётся. Один платный материал сначала продаётся и доставляется вручную. Ориентир Gate 2 — 5–10 платежей от целевой аудитории вне близкого окружения и понятные причины покупки.
+
+Future-документация не является разрешением на реализацию auth, payments, account, comments, community, marketplace, PWA, Telegram Mini App или native apps.

@@ -1,38 +1,83 @@
-# ADR 0001: Notion Canon v2 and gated website evolution
+# ADR 0001: Notion Canon v2 и поэтапная эволюция сайта
 
-- Status: accepted as documentation direction; not implemented
-- Date: 2026-08-04
-- Supersedes: conflicting v1 statements in the documentation, which remain historical context
+- **Статус:** accepted; синхронизация документации выполнена
+- **Дата:** 2026-08-04
+- **Заменяет:** противоречащие Canon v2 стратегические формулировки v1
 
-## Current
+## Контекст
 
-The website is a Next.js App Router static export with repository Markdown. It has no database, authentication, payments, account, comments, CMS, API, backend application runtime, workers, or queues. Pro-leads and Tender Audit are separate products with separate runtime, data, authentication, deployment, logic, and journeys.
+Текущий сайт — статический Next.js App Router export с Markdown-контентом в репозитории. В нём нет БД, auth, payments, account, comments, CMS, API, backend runtime, workers или queues.
 
-## Decision
+Старая документация описывала сайт преимущественно как верх воронки и переходник на Pro-leads и Tender Audit. После полного re-intake утверждена более широкая роль сайта и поэтапная коммерческая эволюция.
 
-The website is Maxim's personal authority hub, canonical source of content and research, and a possible independent commercial branch through paid materials, ideas, research, and later proven tools. It must not become a generic store, agency website, universal SaaS platform, or all-in-one dashboard.
+## Решение
 
-Notion is the approved strategic source while GitHub documents the implemented technical reality and, after this pull request is merged, its synchronized technical canon. This one-time Notion-to-GitHub synchronization is documentation-only. Future strategic change follows the same pattern: approved strategy, GitHub documentation/ADR review, then a separately authorized implementation task.
+Сайт является:
 
-If backend state is justified, the target is a modular monolith with public and authenticated boundaries�not microservices first. Shared infrastructure is considered only after the same need is proven in at least two products.
+- личным authority hub Максима;
+- каноническим источником контента и исследований;
+- контекстной точкой входа в отдельные продукты;
+- потенциальной самостоятельной коммерческой веткой через платные материалы, исследования и позднее подтверждённые инструменты.
 
-## Future / Gate
+Сайт не должен становиться агентством разработки, универсальным SaaS, общим кабинетом всех продуктов или перегруженным магазином.
 
-- Gate 0: expert core.
-- Gate 1: interest signal and manual paid-material test.
-- Gate 2: about 5�10 target-user payments outside Maxim's immediate circle, with clear purchase reasons.
-- Gate 3: minimal commercial layer�free registration, one-time purchases, access management, and an account limited to purchases, available materials, and access state.
-- Gate 4: retention functions only from observed demand.
-- Gate 5: community only after repeated discussion, manual moderation, and a returning core.
-- Gate 6: marketplace discovery only after demand, supply, trust, and monetization evidence.
-- Gate 7: native apps only after regular Web App use proves a mobile-specific need.
+Pro-leads и Tender Audit сохраняют отдельные runtime, данные, auth, deployment, продуктовую логику и пользовательские пути.
 
-Every Gate requires evidence, success criteria, allowed next scope, explicit exclusions, and a stop or rollback condition. Telegram Mini App is not a priority and may later be only a lightweight entry point, notification surface, or narrow isolated scenario.
+## Source of truth
 
-## Out of scope
+- Notion хранит утверждённую стратегию, Gates и пакет решений.
+- GitHub хранит текущий код, технический канон и ADR после review и merge.
+- Синхронизация Notion → GitHub выполняется через отдельную docs-only ветку и PR.
+- Будущее направление не является автоматическим разрешением на реализацию.
 
-Before the relevant Gate and a separate owner authorization, do not implement backend, account, payments, auth, database, comments, community, marketplace, seller tooling, native apps, PWA, or Telegram Mini App. This ADR does not change code, production, deployment, dependencies, routes, configuration, content, or the boundaries of Pro-leads and Tender Audit.
+## Эволюция по Gates
 
-## Consequences
+- **Gate 0:** экспертное ядро и бесплатный контент.
+- **Gate 1:** повторяемый интерес и ручной тест одного платного материала.
+- **Gate 2:** ориентировочно 5–10 платежей от целевых пользователей вне близкого окружения и понятные причины покупки.
+- **Gate 3:** минимальный коммерческий слой — бесплатная регистрация, разовые покупки, управление доступом и кабинет только с покупками/материалами.
+- **Gate 4:** retention-функции по наблюдаемому спросу.
+- **Gate 5:** community после устойчивых обсуждений и ручной модерации.
+- **Gate 6:** курируемый marketplace после подтверждённых спроса, предложения, доверия и монетизации.
+- **Gate 7:** native apps после регулярного использования Web App и доказанного мобильного ограничения.
 
-Commercial validation occurs through a public teaser, manual sale, manual delivery, and evidence capture before the technical commercial layer. The first account exists only to give access to purchased materials. Subscription waits for proven recurring value and repeat demand.
+Каждый Gate должен содержать доказательства, критерии успеха, разрешённый объём, исключения и условие остановки или rollback.
+
+## Техническое следствие
+
+При доказанной необходимости серверного состояния целевая первая форма — модульный монолит с отдельными public и authenticated boundaries.
+
+Выбор auth provider, БД, платежей, access model, deployment и shared services оформляется отдельными ADR. Shared infrastructure допускается после доказанной одинаковой потребности минимум в двух продуктах.
+
+## Commercial validation
+
+До commerce backend:
+
+1. публикуется полезная бесплатная версия;
+2. показывается состав платного результата;
+3. оплата и доставка выполняются вручную;
+4. фиксируются покупатели, причины покупки, отказа и повторный спрос.
+
+Если Gate 2 не пройден, корректируется гипотеза. Платформа не строится ради её спасения.
+
+## Вне рамок этого ADR
+
+ADR не разрешает автоматически:
+
+- новые routes;
+- backend, API, auth, БД и payments;
+- account и access management;
+- comments, community и marketplace;
+- subscription;
+- PWA, Telegram Mini App и native apps;
+- объединение продуктов или их данных;
+- изменение production, deployment или application code.
+
+Telegram Mini App не является приоритетным клиентом; допустим только будущий узкий сценарий после отдельного Gate.
+
+## Последствия
+
+- документы разделяют Current, Approved direction, Future Gate и Out of scope;
+- коммерческая автоматизация следует за ручной проверкой спроса;
+- технические решения принимаются ближе к соответствующему Gate;
+- преждевременное усложнение архитектуры считается ошибкой, а не заделом на будущее.
