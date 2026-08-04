@@ -2,6 +2,4 @@
 
 Самый быстрый способ связаться — Telegram.
 
-- [Telegram](#)
-- [LinkedIn](#)
-- [VK](#)
+- [Telegram](https://t.me/maxightAI)
