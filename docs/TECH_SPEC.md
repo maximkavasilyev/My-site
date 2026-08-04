@@ -1,121 +1,178 @@
-# TECH_SPEC.md 💻 Техническое задание для Claude Code
+# TECH_SPEC.md — текущая техническая спецификация
 
-Ссылается на ARCHITECTURE.md — при конфликте архитектура имеет приоритет.
+Ссылается на `ARCHITECTURE.md`. При конфликте архитектура имеет приоритет.
 
-## Стек
+Статус: **current implementation**. Этот документ описывает реализованный статический сайт. Будущие коммерческие функции не входят в текущий build contract.
 
-- **Фреймворк:** Next.js (React), App Router
-- **Хостинг:** собственный VPS пользователя. Решено: статический экспорт
-  (`output: "export"`, `trailingSlash: true` в next.config.ts) — сайт не использует
-  API-роуты, middleware, next/image, отдаётся nginx'ом без Node-процесса. Рабочий пример
-  конфига — `deploy/nginx.conf.example`. Обоснование и детали — docs/ROADMAP.md,
-  "Незакрытые вопросы".
-- **Контент-модель:** Markdown-файлы в репозитории (`/content/posts/`, `/content/pages/`),
-  без внешней CMS, без базы данных. Причина выбора: пользователь уже работает через Claude
-  Code, доп. сервис (Notion/админка) — лишняя зависимость и/или лишняя разработка на старте.
-- **Стилизация:** Tailwind CSS (стандарт для быстрой и чистой реализации премиум-дизайна)
-- **Язык:** только русский, без i18n-инфраструктуры
+## 1. Стек
 
-## Дизайн-система
+- **Фреймворк:** Next.js, App Router.
+- **Режим:** статический экспорт — `output: "export"`.
+- **Маршрутизация:** `trailingSlash: true`.
+- **Хостинг:** собственный VPS, nginx, без постоянного Node.js application process.
+- **Контент:** Markdown-файлы в `/content/posts/` и `/content/pages/`.
+- **Стилизация:** Tailwind CSS.
+- **Язык:** русский, без i18n-инфраструктуры.
+- **CMS / БД / auth / payments / API:** отсутствуют.
 
-Направление: **минималистичный премиум, Apple-стиль**.
+Рабочий пример nginx-конфигурации: `deploy/nginx.conf.example`.
 
-- Много пустого пространства, воздуха между блоками
-- Крупная, уверенная типографика для заголовков; читаемый, спокойный шрифт для текста
-- Сдержанная палитра: 1 нейтральная база (белый/светло-серый или графитовый тёмный —
-  выбрать один вариант, не смешивать тёмную и светлую тему без явного запроса) + 1 акцентный
-  цвет
-- Плавные, но не навязчивые микро-анимации при скролле/наведении (в духе Apple-презентаций
-  продуктов) — не перегружать
-- Никакого "техно-неонового" визуала, никакого корпоративного шаблона с иконками-плашками
+## 2. Текущие маршруты
 
-### Промт-заготовка для дизайнера/Claude Code (черновик, дорабатывается перед стартом)
+### `/`
 
-```
-Создай дизайн-систему в стиле Apple.com / Linear.app: минимализм, огромные отступы,
-крупная типографика (48-96px для заголовков H1), один акцентный цвет на нейтральном фоне,
-плавные fade-in / slide-up анимации при скролле, никаких лишних теней и градиентов.
-Мобильная адаптация — приоритет, не после-мысль.
-```
+- Hero и позиционирование.
+- Краткое описание деятельности.
+- Превью проектов.
+- Превью материалов.
+- Футер со ссылками.
 
-## Страницы и компоненты
+### `/about`
 
-### 1. Главная (`/`)
-- Hero-блок: имя, ключевое позиционирование (1 фраза), 1 главный визуальный акцент
-- Блок "чем занимаюсь" — 3-4 кратких тезиса (разработчик / архитектор систем / AI-специалист
-  / предприниматель)
-- Превью раздела "Проекты" (2 карточки — Pro-leads, Tender Audit)
-- Превью последних постов из блога (2-3 карточки, смешанные по типу)
-- Футер со ссылками на каналы
+- Личная история, опыт, подход и принципы.
+- Без обязательного продуктового CTA.
 
-### 2. Обо мне (`/about`)
-- Личная история и путь как эксперта (текст — готовится отдельно, см. CONTENT_GUIDE.md)
-- Без CTA на продукт (это репутационная страница)
+### `/projects`
 
-### 3. Проекты (`/projects`)
-- Карточка Pro-leads: краткое описание, ключевая ценность, кнопка-переход на домен
-- Карточка Tender Audit: то же самое
-- Явных сравнений между продуктами не делать — они решают разные задачи
+- Отдельные карточки Pro-leads и Tender Audit.
+- Продукты не сравниваются как альтернативы: они решают разные задачи.
 
-### 4. Блог (`/blog`, `/blog/[slug]`)
-- Лента карточек, с визуальной меткой типа поста (продуктовый / экспертный) —
-  ненавязчивая, не доминирующая в дизайне
-- Продуктовый пост: CTA-блок в конце статьи (компонент `ProductCta`), ведущий на
-  соответствующий продукт — текст CTA берётся из поля `cta_quote` фронтматтера
-- Экспертный пост: без CTA-блока, ссылка на "Обо мне"
+### `/blog` и `/blog/[slug]`
 
-### 5. Контакты (`/contact`)
-- Кнопки-ссылки на каналы связи (Telegram и т.д.)
-- Без формы (см. ARCHITECTURE.md, п.6)
-- Контент — `content/pages/contact.md`: заголовок (`# ...`), один вводный абзац, список
-  каналов как markdown-ссылки (`- [Название](url)`), первый пункт списка рендерится как
-  основная кнопка, остальные — вторичные
+- Лента материалов.
+- Детальная страница поста.
+- Текущая метка `product | expert`.
+- `ProductCta` для продуктовых материалов.
+- Ссылка на `/about` для экспертных материалов.
 
-## Контент-модель (структура markdown-файла поста)
+### `/contact`
+
+Контент берётся из `content/pages/contact.md`:
+
+- заголовок;
+- вводный абзац;
+- Markdown-список каналов;
+- первый канал отображается основной кнопкой, остальные — вторичными.
+
+### `/design-system`
+
+Внутренний неиндексируемый референс дизайн-системы. Это не защищённый маршрут.
+
+## 3. Дизайн-система
+
+Направление: минималистичный премиум.
+
+- много воздуха;
+- крупная типографика;
+- светлая нейтральная база и один акцент;
+- сдержанные микроанимации;
+- mobile-first адаптация;
+- без неонового «AI-визуала», шаблонных корпоративных карточек и декоративного шума.
+
+## 4. Текущая контент-модель поста
 
 ```yaml
 ---
 title: "Заголовок поста"
 date: 2026-08-01
-type: product | expert   # обязательное поле
-product: pro-leads | tender-audit | null   # обязательно при type: product, иначе null
-summary: "Краткое описание для карточки в ленте"
-cta_quote: "Текст CTA-цитаты"   # обязательно при type: product, недопустимо при type: expert
+type: product | expert
+product: pro-leads | tender-audit | null
+summary: "Краткое описание"
+cta_quote: "Текст CTA"
 ---
 
 Текст поста в Markdown...
 ```
 
-Поля `type`/`product`/`cta_quote` управляют тем, показывается ли CTA-блок и на какой продукт
-он ведёт — логика в `lib/posts.ts`, не хардкодится вручную в каждом файле. Фронтматтер
-валидируется в рантайме при билде (`lib/posts.ts`) — при отсутствующем/некорректном поле
-билд падает с понятной ошибкой (путь к файлу, поле, полученное значение, допустимые
-значения), а не тихо ломается или рендерит `undefined`.
+Правила:
 
-## Явно не реализуем на первом этапе
+- `type` обязателен;
+- `product` обязателен при `type: product`, иначе `null`;
+- `cta_quote` обязателен при `type: product` и запрещён при `type: expert`;
+- `type`, `product` и `cta_quote` управляют CTA через `lib/posts.ts`;
+- front matter валидируется во время build; некорректное поле останавливает сборку с понятной ошибкой.
 
-- Форму обратной связи
-- Систему комментариев/опросов с бэкендом
-- Мультиязычность
-- CMS/админ-панель
-- Автоматическую синхронизацию с соцсетями (RSS/API-подтяжку контента)
+## 5. Текущая контент-модель страниц
 
-## Notion Canon v2 � operative override (2026-08-04)
+Статические страницы хранятся в `/content/pages/`. Формат конкретной страницы проверяется её загрузчиком/рендерером. `/contact` использует Markdown-ссылки как источник кнопок каналов.
 
-Conflicting v1 statements above are superseded and retained only as history.
+## 6. Текущие технические ограничения
 
-### Current
+В проекте нет:
 
-The implemented technical contract remains Next.js App Router, static export, Tailwind CSS, repository Markdown, and static nginx/VPS serving without a Node application process. There is no database, auth, payment, account, comments, CMS, backend application runtime, API, Server Action, worker, or queue. The existing page, route, and front-matter specifications remain current implementation facts.
+- Server Actions и application API;
+- БД и persistent server state;
+- auth и account;
+- payments и access management;
+- CMS/админ-панели;
+- comments/community;
+- workers и queues;
+- автоматического cross-posting;
+- общего runtime с Pro-leads или Tender Audit.
 
-### Approved direction
+## 7. Стратегическая контент-модель
 
-The strategic content model can expand conceptually beyond `expert | product`, without changing this current build contract. If a commercial backend becomes justified, its target is a modular monolith with separate public and authenticated boundaries; provider choice, data model, access rules, payments, and deployment require a new technical specification and ADR.
+На уровне редакционной стратегии допустимы:
 
-### Future / Gate
+- заметка;
+- статья;
+- кейс;
+- исследование;
+- продуктовый материал;
+- платный материал.
 
-Only after Gate 2 commercial validation may Gate 3 scope be separately authorized: free registration, individual one-time purchase, purchased-material access, and a minimal account containing purchases, available materials, and access state. Saved content, comments, tools, personalization, community, marketplace, subscription, PWA, Telegram Mini App, and native apps are later evidence-driven decisions.
+Это **не меняет** текущий front matter. Любое расширение схемы требует отдельной спецификации, миграционного плана и проверки renderer/tests.
 
-### Out of scope
+## 8. Условие перехода к backend
 
-No configuration, dependency, route, application code, provider, backend, or current Markdown front-matter implementation is changed.
+Серверное состояние не добавляется до Gate 2:
+
+- ориентировочно 5–10 платежей от целевых пользователей вне близкого окружения;
+- понятная причина покупки;
+- доказательство, что ручная доставка ограничивает подтверждённый спрос.
+
+После отдельного разрешения Gate 3 допускает только минимальный коммерческий слой:
+
+- бесплатная регистрация;
+- разовая покупка конкретного материала;
+- purchase/access state;
+- кабинет со списком покупок и доступных материалов;
+- скачивание приложений;
+- необходимые email-уведомления и юридический контур.
+
+## 9. Целевая форма будущего backend
+
+При доказанной необходимости:
+
+- модульный монолит;
+- отдельные public и authenticated boundaries;
+- auth provider, БД, платежи, access model и deployment выбираются отдельными ADR;
+- shared services допускаются после доказанной одинаковой потребности минимум в двух продуктах.
+
+Микросервисы заранее не вводятся.
+
+## 10. Не входит в текущую реализацию
+
+- `/research`, `/login`, `/account`;
+- commerce backend;
+- saved content и personalization;
+- comments и community;
+- marketplace;
+- subscription;
+- PWA;
+- Telegram Mini App;
+- native apps.
+
+Упоминание этих функций в roadmap не является разрешением на кодирование.
+
+## 11. Проверки
+
+Обязательные проверки текущего проекта:
+
+- lint;
+- production build;
+- static export;
+- Playwright e2e против реального build/start;
+- проверка CTA и front matter;
+- `robots.txt`, `sitemap.xml`, RSS и OG;
+- отсутствие неразрешённых server-runtime зависимостей.
