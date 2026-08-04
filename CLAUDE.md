@@ -61,3 +61,23 @@
                           медиа-канон: BRAND.md, MEDIA_ARCHITECTURE.md, CONTENT_OS.md,
                           CHANNELS.md, EDITORIAL_GUIDE.md, ECOSYSTEM.md, MEDIA_CLAUDE.md
 ```
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+Treat the code and `TECH_SPEC.md` as the source of current implementation: static export, repository Markdown, and no backend, database, auth, payment, account, comments, CMS, API, worker, or queue.
+
+### Approved direction
+
+Treat `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, and ADR 0001 as the synchronized strategic canon: the site is authority hub, canonical content/research source, contextual entry to separate products, and a future commercial branch. `expert | product` is not the complete long-term content model.
+
+### Future / Gate
+
+Do not implement a Web App before Gate 2 commercial validation. Gate 3 is limited to registration, individual purchases, and purchase access. Telegram Mini App is not a priority; native apps are Gate 7. Shared services need evidence in at least two products and an ADR.
+
+### Out of scope
+
+Do not change Pro-leads or Tender Audit boundaries, or infer authorization for backend, account, payment, comments, community, marketplace, PWA, Telegram Mini App, or native-app work from future documentation.

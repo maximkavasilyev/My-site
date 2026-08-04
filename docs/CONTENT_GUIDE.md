@@ -60,3 +60,23 @@
 Готово: все 5 материалов и текст страницы "Обо мне" написаны и лежат в `content/posts/` и
 `content/pages/` (см. ROADMAP.md, Этап 2). Этот список остаётся как образец логики выбора тем
 для следующих постов, а не как открытая задача.
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The current static site renders existing `expert` and `product` posts with the current validated front-matter contract. This task does not change posts, their metadata, or rendering rules.
+
+### Approved direction
+
+For strategy and editorial planning, choose among `note`, `article`, `case`, `research`, `product material`, and `paid material`; `expert | product` is no longer the complete long-term model. Content retains one clear purpose, but a product CTA is contextual rather than universal. Free material must stand alone. Paid material must add depth, evidence, conclusions, practical recommendations, templates, appendices, or an action plan, and must distinguish facts, sources, experience, conclusions, and hypotheses.
+
+### Future / Gate
+
+A Research or equivalent paid-material section may be introduced only after commercial validation; material must remain discoverable from the blog and thematic collections. New implementation metadata or CTA behavior requires a separate technical specification and authorization.
+
+### Out of scope
+
+No existing post, front matter, content renderer, CTA component, or route is changed.

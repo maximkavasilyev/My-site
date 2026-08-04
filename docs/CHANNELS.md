@@ -136,3 +136,23 @@
 - понятно, откуда берётся контент;
 - стоимость поддержки приемлема;
 - канал не дублирует существующий без причины.
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The website, Telegram, VC.ru, Dzen, VK, MAX, LinkedIn, and other channels remain distinct surfaces. No channel integration or automatic cross-posting is implemented.
+
+### Approved direction
+
+The website is the canonical source where strategic, long-form value accumulates. Channels distribute adapted versions, excerpts, native posts, and relevant links; no channel post is required to link back. Priority is website, personal Telegram, relevant external article surfaces, product channels, then email when there is a credible reason to return. Measure targeted transitions, subscriptions and returns, meaningful replies, registrations and purchases, product transitions, and production cost; reach and likes are supporting signals.
+
+### Future / Gate
+
+Email is a retention channel only after sustained content and commercial material exist. Telegram Mini App is not a priority product direction and may only be a lightweight entry point, notification surface, or narrow isolated scenario after a Gate.
+
+### Out of scope
+
+No channel launch, integration, automation, email system, Telegram Mini App, or production content change is authorized.

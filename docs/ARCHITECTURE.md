@@ -94,3 +94,23 @@ CTA на продукт.** Работает на раздел "Обо мне" и
   трогать не будем (осознанное решение пользователя).
 - CMS/Notion/админка — отклонены в пользу Markdown-файлов через Claude Code (см.
   TECH_SPEC.md, п. "Контент-модель").
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The implemented website is a Next.js App Router static export. It renders Markdown content from the repository and has no database, authentication, payments, account, comments, CMS, API, backend application runtime, workers, or queues. Current routes are `/`, `/about`, `/projects`, `/blog`, and `/contact`; `/design-system` is an internal non-indexed reference route. Pro-leads and Tender Audit remain separate products.
+
+### Approved direction
+
+The website is Maxim's personal authority hub, canonical source of content and research, contextual entry point to separate products, and a future independent commercial branch. It is not only a traffic funnel, generic store, agency site, universal SaaS platform, or all-in-one dashboard. If server state becomes justified, the target backend is a modular monolith with separate public and authenticated boundaries; providers require a separate ADR. Shared services require proven use in at least two products.
+
+### Future / Gate
+
+Gate 0: expert core. Gate 1: repeated interest plus a manual paid-material test. Gate 2: about 5�10 target-user payments outside Maxim's immediate circle, with clear purchase reasons. Gate 3: a separately authorized minimal commercial layer�free registration, one-time purchases, access management, and a purchases/access account. Gate 4: retention from observed demand. Gate 5: community after repeated discussion and manual moderation. Gate 6: marketplace after demand, supply, trust, and monetization evidence. Gate 7: native apps only after regular Web App use proves a mobile-specific need. Each Gate requires evidence, success criteria, permitted scope, exclusions, and a stop or rollback condition. Telegram Mini App is not a priority; it may only be a lightweight entry point, notification surface, or narrow isolated scenario.
+
+### Out of scope
+
+No route, backend, API, auth, database, payment, account, comments, community, marketplace, PWA, Telegram Mini App, or native app is implemented or authorized by this change.

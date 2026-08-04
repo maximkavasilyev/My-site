@@ -116,3 +116,23 @@
   без угадывания `.html`-расширений). `next/link` сам расставляет trailing slash во внутренних
   ссылках, править компоненты не пришлось. Рабочий пример конфига — `deploy/nginx.conf.example`
   (заменить `server_name` на реальный домен и путь `root` при деплое).
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The website is a completed static Next.js implementation. This branch only synchronizes documentation; it does not alter deployment, production, application code, content, or configuration.
+
+### Approved direction
+
+The sequence is: Gate 0 expert core > Gate 1 interest signal and one manual paid-material test > Gate 2 commercial validation > Gate 3 minimal commercial layer > Gate 4 retention > Gate 5 community > Gate 6 marketplace discovery > Gate 7 native-app consideration. The website remains the canonical content source and Pro-leads and Tender Audit remain separate.
+
+### Future / Gate
+
+Gate 2 requires approximately 5�10 payments from target users outside Maxim's immediate circle and clear reasons for purchase; without it, revise or stop the offer rather than build a platform. Gate 3 is limited to free registration, individual purchase, purchase/access state, and access to materials. Every Gate records evidence, success criteria, permitted scope, excluded functions, and a stop or rollback condition. Subscription is considered only after proven recurring value and repeat demand; it does not accelerate any Gate.
+
+### Out of scope
+
+No implementation of Research, login, account, payments, auth, database, API, comments, community, marketplace, PWA, Telegram Mini App, or native apps is scheduled by this docs-only change.

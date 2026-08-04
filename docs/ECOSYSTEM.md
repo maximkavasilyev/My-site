@@ -113,3 +113,23 @@
 4. Не использовать личный бренд как замену продуктовой ценности.
 5. Не превращать медиа в рекламный каталог.
 6. Каждый новый контур должен иметь владельца, границы и метрики.
+
+## Notion Canon v2 � operative override (2026-08-04)
+
+Conflicting v1 statements above are superseded and retained only as history.
+
+### Current
+
+The personal website/media system, Pro-leads, and Tender Audit are separate product contours. Pro-leads and Tender Audit retain separate runtime, databases, authentication, deployment, product logic, and user journeys.
+
+### Approved direction
+
+The website/media system may test an independent commercial branch through paid research, materials, ideas, and later proven tools. It is neither an agency nor a dashboard for all products. The website may contextually introduce the separate products, but users and product data are not automatically combined. A shared authentication, billing, notification, analytics, AI gateway, storage, or admin service requires the same proven need in at least two products and a separate ADR.
+
+### Future / Gate
+
+Marketplace belongs to the website/media branch, not Pro-leads or Tender Audit. Its first possible form is a manually curated directory of verified specialists, services, tools, or templates, using affiliate links, paid listings, or lead generation. Reviews require verified interaction; transaction payments, seller dashboards, commissions, disputes, and complex roles wait for later evidence.
+
+### Out of scope
+
+No product merge, shared account, shared infrastructure, marketplace, seller function, or cross-product data change is authorized.
