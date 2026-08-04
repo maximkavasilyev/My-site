@@ -64,13 +64,13 @@ export default function Home() {
                 href="/projects"
                 className="rounded-full bg-accent px-6 py-3 text-body font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
               >
-                Проекты
+                Для бизнеса
               </Link>
               <Link
-                href="/about"
+                href="/blog"
                 className="rounded-full border border-border px-6 py-3 text-body font-medium text-foreground transition-colors hover:border-foreground"
               >
-                Обо мне
+                Для создателей
               </Link>
             </div>
           </section>
