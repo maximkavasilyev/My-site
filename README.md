@@ -59,3 +59,16 @@ One paid material is validated manually before any commerce backend. Only after 
 ### Out of scope
 
 No commercial, account, community, marketplace, Telegram Mini App, native-app, or code implementation is included in this documentation synchronization.
+
+## Static features and tests
+
+RSS (`/rss.xml`) and generated Open Graph images for the home page and posts are part of the static export. The optional analytics component is disabled unless its build-time environment variable is explicitly set; enabling any analytics provider requires a separate decision.
+
+Playwright E2E tests cover navigation, blog/CTA behavior, the mobile menu, Russian 404, RSS, sitemap, robots, and Open Graph output against the static export:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+CI runs lint, build, and E2E on every pull request and push to `main`.

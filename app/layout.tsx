@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Playfair_Display } from "next/font/google";
+import Analytics from "./components/Analytics";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -19,6 +20,9 @@ export const metadata: Metadata = {
   title: "Максим — разработчик, архитектор систем, AI-специалист",
   description:
     "Личный сайт Максима: экспертиза в разработке, архитектуре систем и AI — с переходом на Pro-leads и Tender Audit.",
+  alternates: {
+    types: { "application/rss+xml": "/rss.xml" },
+  },
 };
 
 export default function RootLayout({
@@ -39,6 +43,7 @@ export default function RootLayout({
           Перейти к содержанию
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );
