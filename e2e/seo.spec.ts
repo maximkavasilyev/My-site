@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { getAllPosts } from "@/lib/posts";
 
 test("robots.txt отдаётся и закрывает /design-system от индексации", async ({ request }) => {
   const res = await request.get("/robots.txt");
@@ -16,13 +17,13 @@ test("sitemap.xml валиден и содержит все посты", async (
   expect(body).toContain("/blog/suppliers-lose-before-submission/");
 });
 
-test("rss.xml валиден, содержит все 5 постов, экранирован", async ({ request }) => {
+test("rss.xml валиден, содержит все посты, экранирован", async ({ request }) => {
   const res = await request.get("/rss.xml");
   expect(res.status()).toBe(200);
   const body = await res.text();
   expect(body).toContain("<rss version=\"2.0\"");
   const itemCount = (body.match(/<item>/g) ?? []).length;
-  expect(itemCount).toBe(5);
+  expect(itemCount).toBe(getAllPosts().length);
 });
 
 test("og:image присутствует на Главной и на посте, указывает на разные картинки", async ({

@@ -1,13 +1,10 @@
 import { test, expect } from "@playwright/test";
+import { getAllPosts } from "@/lib/posts";
 
-test("лента блога показывает все 5 постов в стабильном порядке", async ({ page }) => {
+test("лента блога показывает все посты в стабильном порядке", async ({ page }) => {
   await page.goto("/blog/");
   const titles = await page.locator("main h3").allTextContents();
-  expect(titles).toHaveLength(5);
-
-  // Регрессия: раньше компаратор sort() разворачивал список при равных датах —
-  // "latest 3" на Главной оказывался в обратном алфавитном порядке файлов.
-  expect(titles[0]).toBe("Почему хороший AI-продукт начинается не с модели, а с архитектуры");
+  expect(titles).toEqual(getAllPosts().map((post) => post.title));
 });
 
 test("продуктовый пост: CTA-блок из cta_quote ведёт на правильный продукт", async ({ page }) => {

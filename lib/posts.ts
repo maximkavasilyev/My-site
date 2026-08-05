@@ -97,8 +97,8 @@ export function getAllPosts(): PostMeta[] {
   const posts = files.map((file) => readPostFile(file).meta);
 
   return posts.sort((a, b) => {
-    if (a.date === b.date) return 0;
-    return a.date < b.date ? 1 : -1;
+    if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+    return a.slug.localeCompare(b.slug);
   });
 }
 
