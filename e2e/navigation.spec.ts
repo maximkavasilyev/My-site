@@ -53,3 +53,16 @@ test("клавиатурный фокус виден акцентным outline,
     expect(outlineColor).toBe("rgb(181, 80, 44)");
   }).toPass({ timeout: 2000 });
 });
+
+test("product links carry shared UTM parameters", async ({ page }) => {
+  const products = [
+    ["Pro-leads", "https://pro-leads.ru/?utm_source=maxightai.ru&utm_medium=referral&utm_campaign=product-links"],
+    ["Tender Audit", "https://tenderaudit.ru/?utm_source=maxightai.ru&utm_medium=referral&utm_campaign=product-links"],
+  ] as const;
+
+  await page.goto("/projects/");
+  for (const [name, href] of products) {
+    await expect(page.locator("main").getByRole("link", { name: `Перейти на ${name} →` })).toHaveAttribute("href", href);
+    await expect(page.locator("footer").getByRole("link", { name, exact: true })).toHaveAttribute("href", href);
+  }
+});

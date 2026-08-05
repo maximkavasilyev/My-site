@@ -8,8 +8,8 @@ const PROJECTS_FILE = path.join(process.cwd(), "content/pages/projects.md");
 export type ProjectSlug = "pro-leads" | "tender-audit";
 
 export const PROJECT_URLS: Record<ProjectSlug, string> = {
-  "pro-leads": "https://pro-leads.ru",
-  "tender-audit": "https://tenderaudit.ru",
+  "pro-leads": "https://pro-leads.ru/?utm_source=maxightai.ru&utm_medium=referral&utm_campaign=product-links",
+  "tender-audit": "https://tenderaudit.ru/?utm_source=maxightai.ru&utm_medium=referral&utm_campaign=product-links",
 };
 
 export type Project = {
