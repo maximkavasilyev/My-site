@@ -43,6 +43,18 @@ GitHub хранит:
 
 Изменение канона считается действующим после review и merge в `main`, если оно не противоречит более новому явному решению владельца в Notion.
 
+### `agents` — технический runtime для утверждённых publication targets
+
+Отдельный репозиторий `maxight-agent-platform` (`agents`) исполняет durable workflow: Telegram intake, approval и deterministic publishing для publication targets, явно утверждённых владельцем (см. `docs/adr/0003-agents-platform-as-technical-runtime.md`). Сейчас это `t.me/proleads_ru`, `t.me/tenderaudit`, `t.me/maxightAI`.
+
+`agents` хранит:
+
+- контракты и durable state (PostgreSQL) для intake/approval/outbox;
+- Telegram control bot и publisher как systemd-сервисы на отдельном VPS;
+- собственные Gate records (`docs/gates/G1`–`G4` в этом репозитории), независимые от Media Gates M0–M6 этого репозитория.
+
+`agents` не хранит стратегию, позиционирование или Media Gate статусы — они остаются в Notion и в этом репозитории. Новый publication target подключается к `agents` только после явного решения владельца и, для каналов тематической редакционной сети, после прохождения Gate M1 по `EDITORIAL_NETWORK.md`.
+
 ### Локальный клон — рабочая копия
 
 Локальный репозиторий используется для:
@@ -61,10 +73,11 @@ GitHub хранит:
 
 1. явное последнее решение Максима;
 2. утверждённая стратегия и Gate в Notion;
-3. merged GitHub canon и ADR;
-4. открытый PR;
-5. локальная рабочая копия;
-6. сообщения агентов и временные черновики.
+3. merged GitHub canon и ADR (в этом репозитории и в `agents`);
+4. runtime-состояние `agents` (какие publication targets реально подключены);
+5. открытый PR;
+6. локальная рабочая копия;
+7. сообщения агентов и временные черновики.
 
 Если решение Notion требует изменения GitHub-канона, нельзя молча исполнять его только локально. Нужно создать ветку, обновить документы, открыть PR и после merge обновить статус синхронизации в Notion.
 
