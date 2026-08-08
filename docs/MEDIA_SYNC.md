@@ -1,145 +1,194 @@
-# MEDIA_SYNC.md — синхронизация Notion, GitHub и локального клона
+# MEDIA_SYNC.md — синхронизация Notion, GitHub, agents, product repos и local
 
 - **Статус:** Canon / operating contract
-- **Версия:** 1.0
-- **Область:** персональная медиа-система, тематическая редакционная сеть и связанные контентные операции.
+- **Версия:** 2.0
+- **Дата:** 2026-08-08
+- **Область:** персональная медиасистема, тематическая редакционная сеть, publication runtime и product distribution boundaries.
+- **Топология:** `MEDIA_TOPOLOGY.md`
 
 ## 1. Цель
 
-Не допустить появления трёх независимых версий медиасистемы в Notion, GitHub и на ноутбуке.
+Не допустить появления разных версий медиасистемы в Notion, `My-site`, `agents`, продуктовых репозиториях и локальных клонах.
 
-Синхронизация не означает двустороннее автоматическое копирование всех файлов. У каждого слоя есть своя ответственность, а изменения проходят определённый маршрут.
+Синхронизация не означает копировать одни и те же документы во все системы. Каждый слой хранит только свою ответственность.
 
 ## 2. Роли систем
 
-### Notion — управление и операционная работа
+### Notion — стратегия и операции
 
 Notion хранит:
 
-- утверждённую стратегию владельца;
-- решения по позиционированию и каналам;
-- статусы Gates;
-- редакционный backlog;
-- контент-календарь;
-- реестр источников и кандидатов;
-- задачи и ответственных;
-- статусы материалов;
-- аналитику и редакционные наблюдения;
-- журнал решений владельца до переноса канонических изменений в GitHub.
+- явные решения владельца;
+- позиционирование и platform/channel decisions;
+- Gates;
+- backlog и calendar;
+- source/candidate registries;
+- material statuses;
+- analytics и observations;
+- журнал стратегических решений.
 
-Notion не является источником фактов о текущем коде, deployment или структуре репозитория.
+Notion не является источником фактов о текущем code/deployment/runtime.
 
-### GitHub — versioned canon и технический контракт
+### My-site — versioned media canon
 
-GitHub хранит:
+Хранит:
 
-- канонические Markdown-документы;
+- `MEDIA_TOPOLOGY.md`;
+- media architecture;
+- channel roles;
+- editorial network;
+- Content OS;
 - ADR;
-- правила Claude Code и других агентов;
-- формальные границы медиасистемы, каналов и продуктов;
-- versioned templates и schemas;
-- техническую реализацию сайта;
-- историю review, pull requests и commits.
+- sync contract;
+- сайт и долгоживущий контент.
 
-Изменение канона считается действующим после review и merge в `main`, если оно не противоречит более новому явному решению владельца в Notion.
+Для current media topology приоритет имеют ADR 0004 и `MEDIA_TOPOLOGY.md`.
 
-### `agents` — технический runtime для утверждённых publication targets
+### agents — technical execution runtime
 
-Отдельный репозиторий `maxight-agent-platform` (`agents`) исполняет durable workflow: Telegram intake, approval и deterministic publishing для publication targets, явно утверждённых владельцем (см. `docs/adr/0003-agents-platform-as-technical-runtime.md`). Сейчас это `t.me/proleads_ru`, `t.me/tenderaudit`, `t.me/maxightAI`.
+`agents` исполняет durable workflows intake/approval/publication для явно подключённых publication targets.
 
-`agents` хранит:
+Он не определяет:
 
-- контракты и durable state (PostgreSQL) для intake/approval/outbox;
-- Telegram control bot и publisher как systemd-сервисы на отдельном VPS;
-- собственные Gate records (`docs/gates/G1`–`G4` в этом репозитории), независимые от Media Gates M0–M6 этого репозитория.
+- зачем существует канал;
+- должен ли продукт иметь отдельную social surface;
+- позиционирование;
+- Media Gate/PSG status.
 
-`agents` не хранит стратегию, позиционирование или Media Gate статусы — они остаются в Notion и в этом репозитории. Новый publication target подключается к `agents` только после явного решения владельца и, для каналов тематической редакционной сети, после прохождения Gate M1 по `EDITORIAL_NETWORK.md`.
+Эти решения приходят из media canon/owner decision.
 
-### Локальный клон — рабочая копия
+### Product repositories
 
-Локальный репозиторий используется для:
+`pro-leads` и `tender-audit` хранят:
 
-- разработки и редактирования;
-- запуска проверок;
-- подготовки commits и pull requests;
-- работы Claude Code и Desktop Codex;
-- локального просмотра контента и сайта.
+- product scope;
+- runtime/data/auth/billing/deploy truth;
+- product UX/delivery channels;
+- product-specific growth/distribution boundaries.
 
-Локальная незакоммиченная версия не является источником истины. Она должна быть либо оформлена в ветку и PR, либо удалена.
+Они не должны самостоятельно объявлять новый публичный product social channel без согласования с `My-site` Product Social Gate.
 
-## 3. Приоритет при конфликте
+### Local clones
 
-При расхождении использовать порядок:
+Рабочая копия GitHub. Незакоммиченный local state не является отдельным каноном.
 
-1. явное последнее решение Максима;
-2. утверждённая стратегия и Gate в Notion;
-3. merged GitHub canon и ADR (в этом репозитории и в `agents`);
-4. runtime-состояние `agents` (какие publication targets реально подключены);
-5. открытый PR;
-6. локальная рабочая копия;
-7. сообщения агентов и временные черновики.
+## 3. Текущая медиа-топология
 
-Если решение Notion требует изменения GitHub-канона, нельзя молча исполнять его только локально. Нужно создать ветку, обновить документы, открыть PR и после merge обновить статус синхронизации в Notion.
+Author layer:
 
-## 4. Маршрут стратегического изменения
+- Telegram Максима;
+- один MAX Максима;
+- существующая профессиональная/авторская VK-страница Максима;
+- существующая профессиональная/авторская Instagram-страница Максима;
+- личный сайт;
+- TenChat/LinkedIn/VC.ru/Дзен/другие поверхности по функции.
+
+Editorial network:
+
+1. Новости нейросетей — Telegram;
+2. Разработка с AI — Telegram;
+3. AI-инструменты — Telegram.
+
+Products:
+
+- Pro-leads — отдельный software product;
+- Tender Audit — отдельный software product;
+- отдельная public social surface продукта — только после Product Social Gate.
+
+## 4. Текущие technical publication targets в agents
+
+На момент принятия протокола runtime исторически содержит:
+
+- `proleads_ru`;
+- `tenderaudit`;
+- `maxightAI`.
+
+Новая стратегическая классификация:
+
+- `proleads_ru` — **legacy product media target**;
+- `tenderaudit` — **legacy product media target**;
+- `maxightAI` — **legacy technical identifier авторского Telegram Максима**.
+
+Это важное различие:
 
 ```text
-Решение владельца
-→ запись в Notion
-→ определение затронутых документов
-→ отдельная Git-ветка
-→ изменение Markdown / ADR
-→ review и PR
-→ merge в main
-→ git pull локально
-→ отметка в Notion: synced_to_github
+runtime target exists != editorial channel is strategically required
 ```
 
-Стратегическое изменение включает:
+Документационное изменение не отключает target, не меняет channel ID/token и не делает production migration. Operational transition выполняется отдельно после проверки фактических каналов и desired mode (freeze/archive/redirect/repurpose).
+
+## 5. Новые thematic publication targets
+
+Три тематических Telegram-канала пока являются approved editorial direction. Они подключаются к `agents` только когда соответствующий Media Gate разрешает это и владелец явно утверждает target/account.
+
+Никакой существующий generic publisher не является автоматическим разрешением на onboarding нового канала.
+
+## 6. Product UX не синхронизируется как media target
+
+Не относить автоматически к публичной медиасистеме:
+
+- Telegram-бот доставки лидов;
+- MAX Bot/Mini App Tender Audit;
+- Tender Audit web channel;
+- email/transactional notifications;
+- support inbox;
+- webhook/API/CRM integrations.
+
+Это product UX/integration surfaces. Их жизненный цикл определяется product repo.
+
+## 7. Приоритет при конфликте
+
+1. последнее явное решение Максима;
+2. текущая стратегия/Gate в Notion;
+3. merged `My-site` media canon и ADR;
+4. product repo для product runtime/UX facts;
+5. `agents` docs/runtime facts для execution state;
+6. open PR;
+7. local working copy;
+8. temporary agent output.
+
+Если runtime и strategy расходятся, оба факта фиксируются отдельно. Нельзя выдавать docs-only решение за уже выполненную production migration.
+
+## 8. Маршрут стратегического изменения
+
+```text
+owner decision
+→ Notion decision/status
+→ My-site ADR/canon
+→ определить impact на agents и product repos
+→ синхронизировать product boundaries/runtime docs
+→ при необходимости отдельная implementation/runtime задача
+→ local pull
+→ sync record
+```
+
+Стратегические изменения:
 
 - новый канал;
 - изменение роли канала;
+- создание/закрытие product social surface;
 - изменение позиционирования;
-- разрешение нового Gate;
-- изменение продуктовых границ;
-- запуск автоматизации;
-- подключение новой платформы;
-- изменение системы монетизации;
-- изменение правил публикации.
+- изменение Media Gate/PSG;
+- новая platform automation;
+- изменение product/media boundary.
 
-## 5. Маршрут обычного контента
+## 9. Маршрут обычного контента
 
 ```text
-идея или источник
-→ запись в Notion / content inbox
-→ исследование и review
-→ выбор канонической поверхности
-→ публикация
-→ запись результата и URL в Notion
-→ при долговечном материале: файл в GitHub /content или /media
+idea/source/work result
+→ content inbox
+→ research/review
+→ choose primary home
+→ publish
+→ record URL/result
+→ durable material → GitHub /content or /media when needed
 ```
 
-Не каждый пост Telegram обязан становиться GitHub-файлом. В GitHub попадают:
+Не каждый Telegram/MAX/VK/Instagram-пост обязан становиться GitHub-файлом.
 
-- долговечные канонические материалы;
-- исследования;
-- важные шаблоны;
-- утверждённые редакционные правила;
-- versioned сценарии и схемы;
-- материалы сайта;
-- данные, необходимые для воспроизводимости и аудита.
+## 10. Sync metadata
 
-## 6. Идентификаторы
-
-Каждый существенный контентный объект получает стабильный `content_id`.
-
-Рекомендуемый формат:
-
-```text
-CNT-YYYYMMDD-NNN
-```
-
-Поля синхронизации:
+Для существенного content object:
 
 ```yaml
 content_id:
@@ -152,155 +201,59 @@ status:
 version:
 valid_as_of:
 last_synced_at:
-sync_state: notion-only | github-draft | pr-open | merged | local-ahead | conflict
+sync_state: notion-only | github-draft | merged | local-ahead | conflict
 ```
 
-Ссылки могут быть пустыми, если объект не должен существовать на соответствующей поверхности.
+## 11. Git discipline
 
-## 7. Ветки и pull requests
+Связное стратегическое изменение должно быть отделено от несвязанного code change.
 
-Для изменений медиасистемы использовать ветки:
+Исторические ADR/gate records не переписываются так, будто прежнего решения не было. Новая политика либо:
 
-```text
-docs/media-<topic>
-content/<content-id>-<slug>
-chore/media-<topic>
-```
+- создаёт новый ADR;
+- явно supersedes конкретный scope;
+- обновляет current operating docs.
 
-Правила:
+Не удалять старые документы только потому, что решение изменилось.
 
-- не менять канон напрямую в `main`;
-- один PR — одно связное решение;
-- не смешивать документацию медиасистемы с несвязанным кодом;
-- в PR указывать связанное решение или страницу Notion;
-- перед merge проверять отсутствие конфликта с product boundaries и Gates;
-- после merge локальный `main` обновляется через fast-forward pull.
+## 12. Работа agents/LLM
 
-## 8. Локальная синхронизация
+Перед media task определить:
 
-Перед началом работы:
+- Current;
+- Approved direction;
+- Future Gate;
+- Out of scope;
+- Source of truth;
+- Sync impact.
 
-```bash
-git status
-git switch main
-git pull --ff-only
-git switch -c docs/media-<topic>
-```
+Запрещено:
 
-После merge:
+- создавать новую product social surface из факта существования продукта;
+- путать legacy publication target с current strategy;
+- путать product UX с media channel;
+- менять channel IDs/tokens/credentials из документационной задачи;
+- механически cross-post;
+- самостоятельно открывать Gate;
+- хранить secrets в Markdown/Notion.
 
-```bash
-git switch main
-git pull --ff-only
-git branch -d docs/media-<topic>
-```
+## 13. Sync Gates
 
-Если `git status` показывает незнакомые изменения, агент не должен их перезаписывать или включать в свой commit.
+- **S0:** ручная дисциплина между системами;
+- **S1:** read-only diff/check;
+- **S2:** agent prepares draft/PR/change set;
+- **S3:** agent may update only safe service metadata.
 
-## 9. Работа агентов
+Стратегию, product boundaries и Gates меняет только явное решение владельца.
 
-Перед медиа-задачей агент обязан прочитать:
+## 14. Проверка завершения стратегического sync
 
-1. `CLAUDE.md`;
-2. `docs/MEDIA_CLAUDE.md`;
-3. `docs/MEDIA_ARCHITECTURE.md`;
-4. `docs/EDITORIAL_NETWORK.md`;
-5. `docs/MEDIA_SYNC.md`;
-6. `docs/CONTENT_OS.md`;
-7. `docs/CHANNELS.md`;
-8. релевантный ADR и продуктовые документы.
-
-Агент обязан определить:
-
-- что является Current;
-- что является Approved direction;
-- какой Gate открыт;
-- какая система является источником истины для изменяемого объекта;
-- нужны ли изменения Notion, GitHub, локального клона или нескольких слоёв.
-
-Агент не должен:
-
-- считать локальный файл более новым только по дате изменения;
-- создавать параллельный канон;
-- копировать всю базу Notion в GitHub;
-- менять стратегию только в промпте;
-- публиковать или включать автоматизацию без разрешённого Gate;
-- синхронизировать секреты, токены и персональные данные.
-
-## 10. Состояния синхронизации
-
-- `notion-only` — рабочее решение или объект существует только в Notion;
-- `github-draft` — подготовлен локальный или веточный Markdown;
-- `pr-open` — изменение проходит review;
-- `merged` — канон находится в `main`;
-- `local-ahead` — локально есть commits, отсутствующие в remote;
-- `conflict` — источники расходятся и требуется решение владельца.
-
-Состояние `conflict` запрещает автоматическую публикацию и дальнейшее изменение затронутого канона до разрешения.
-
-## 11. Автоматизация синхронизации
-
-Автоматизация допускается поэтапно.
-
-### Sync Gate S0 — ручная дисциплина
-
-- ссылки Notion ↔ GitHub добавляются вручную;
-- PR и merge выполняются вручную;
-- локальный pull выполняется владельцем.
-
-### Sync Gate S1 — проверки расхождений
-
-Допустим read-only агент, который:
-
-- сравнивает версии документов;
-- ищет страницы без GitHub-ссылок;
-- ищет merged PR без отметки в Notion;
-- формирует отчёт, но ничего не изменяет.
-
-### Sync Gate S2 — подготовка черновиков
-
-Агент может:
-
-- создать draft-изменение;
-- сформировать ветку и PR;
-- предложить обновление Notion;
-- запросить review владельца.
-
-### Sync Gate S3 — ограниченные записи
-
-После устойчивой работы агент может обновлять только безопасные служебные поля:
-
-- `github_commit`;
-- `github_pr`;
-- `last_synced_at`;
-- `sync_state`;
-- URL опубликованного материала.
-
-Стратегию, Gates, позиционирование и product boundaries агент самостоятельно не меняет.
-
-## 12. Секреты и доступы
-
-Не синхронизировать в Notion, GitHub или Markdown:
-
-- Telegram bot tokens;
-- API keys;
-- OAuth refresh tokens;
-- пароли;
-- приватные cookie;
-- SSH private keys;
-- персональные данные пользователей;
-- неопубликованные коммерческие данные продуктов.
-
-Секреты хранятся в предназначенном для этого secret store или переменных окружения конкретного runtime.
-
-## 13. Проверка завершения изменения
-
-Изменение считается завершённым, если:
+Изменение считается синхронизированным, когда:
 
 - решение отражено в Notion;
-- затронутый GitHub-канон обновлён;
-- PR прошёл review и merged;
-- локальный `main` подтянут;
-- ссылки и commit SHA записаны;
-- нет состояния `conflict`;
-- не создан параллельный документ с дублирующей ответственностью.
+- `My-site` current canon обновлён;
+- `agents` current planning/runtime docs не противоречат решению;
+- product repos отражают новую distribution boundary;
+- legacy/history сохранены;
+- docs-only change не выдаётся за runtime migration;
+- владелец может подтянуть все затронутые `main` через `git pull --ff-only`.
