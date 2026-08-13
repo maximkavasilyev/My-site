@@ -53,16 +53,43 @@ jobs:
       - name: Verify site is live
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          for i in 1 2 3 4 5; do
-            code=$(curl -s -o /dev/null -w "%{http_code}" https://maxightai.ru/)
-            if [ "$code" = "200" ]; then
-              echo "Site is up (HTTP $code)"
-              exit 0
+          base_url="https://maxightai.ru"
+
+          check_page() {
+            path="$1"
+            marker="$2"
+            body_file="$(mktemp)"
+            code=$(curl --fail --silent --show-error --location --max-time 20 \
+              --output "$body_file" --write-out "%{http_code}" "$base_url$path") || code="curl-failed"
+            if [ "$code" != "200" ] || ! grep -Fq "$marker" "$body_file"; then
+              echo "::error::Smoke check failed for $path (HTTP $code, marker: $marker)"
+              rm -f "$body_file"
+              return 1
             fi
-            echo "Attempt $i: got HTTP $code, retrying..."
+            echo "Smoke check passed for $path (HTTP $code)"
+            rm -f "$body_file"
+          }
+
+          for attempt in 1 2 3 4 5; do
+            if check_page "/" "<main" \
+              && check_page "/projects/" "Pro-leads" \
+              && check_page "/blog/" "Блог" \
+              && check_page "/rss.xml" "<rss" \
+              && check_page "/sitemap.xml" "<urlset"; then
+              not_found_code=$(curl --silent --show-error --location --max-time 20 \
+                --output /dev/null --write-out "%{http_code}" "$base_url/__ci_known_404__")
+              if [ "$not_found_code" = "404" ]; then
+                echo "Smoke check passed for /__ci_known_404__ (HTTP 404)"
+                exit 0
+              fi
+              echo "Attempt $attempt: expected HTTP 404 for known missing route, got $not_found_code"
+            else
+              echo "Attempt $attempt: one or more critical-route checks failed"
+            fi
             sleep 5
           done
-          echo "::error::Site health check failed after deploy"
+
+          echo "::error::Site smoke checks failed after deploy"
           exit 1
 
       - name: Comment PR status

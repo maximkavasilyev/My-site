@@ -1,6 +1,6 @@
 # Пример nginx-конфига для статического экспорта (out/), под trailingSlash: true
 # из next.config.ts. Заменить server_name на реальный домен при деплое
-# (см. docs/ROADMAP.md, "Незакрытые вопросы" — домен ещё не куплен).
+# Production URL текущего контура: https://maxightai.ru.
 #
 # Деплой: скопировать содержимое out/ (после `npm run build`) в root ниже,
 # например /var/www/my-site/out.
