@@ -13,6 +13,8 @@ export default function ScrollReveal({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    document.documentElement.dataset.js = "true";
+
     const node = ref.current;
     if (!node) return;
 

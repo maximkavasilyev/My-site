@@ -59,14 +59,19 @@ button:focus-visible {
 
 /* Скролл-reveal: включается через ScrollReveal (IntersectionObserver), см. app/components. */
 .reveal {
-  opacity: 0;
-  transform: translateY(8px);
+  opacity: 1;
+  transform: none;
   transition:
     opacity 500ms ease-out,
     transform 500ms ease-out;
 }
 
-.reveal.is-visible {
+html[data-js="true"] .reveal {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+html[data-js="true"] .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
