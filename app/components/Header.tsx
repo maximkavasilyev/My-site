@@ -15,6 +15,7 @@ const MOBILE_NAV_ID = "mobile-nav";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -28,6 +29,27 @@ export default function Header() {
       if (event.key === "Escape") {
         setOpen(false);
         toggleButtonRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab" || !menuRef.current) return;
+
+      const focusableElements = Array.from(
+        menuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -77,6 +99,7 @@ export default function Header() {
 
       {open && (
         <div
+          ref={menuRef}
           id={MOBILE_NAV_ID}
           className="mobile-nav-enter fixed inset-0 z-40 flex flex-col bg-background sm:hidden"
         >

@@ -35,6 +35,25 @@ test("мобильное меню: Escape закрывает и возвраща
   expect(bodyOverflow).not.toBe("hidden");
 });
 
+test("мобильное меню: Tab удерживает фокус внутри меню", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Открыть меню" }).click();
+  const menu = page.locator("#mobile-nav");
+  const close = menu.getByRole("button", { name: "Закрыть меню" });
+  const firstLink = menu.getByRole("link", { name: "Обо мне", exact: true });
+  const lastLink = menu.getByRole("link", { name: "Контакты", exact: true });
+
+  await lastLink.focus();
+  await page.keyboard.press("Tab");
+  await expect(close).toBeFocused();
+
+  await close.focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(lastLink).toBeFocused();
+
+  await firstLink.focus();
+});
+
 test("мобильное меню: клик по пункту ведёт на нужную страницу", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Открыть меню" }).click();

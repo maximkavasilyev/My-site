@@ -103,13 +103,14 @@ export default function Home() {
             </div>
             <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {projects.map((project) => (
-                <div
+                <Link
                   key={project.slug}
-                  className="rounded-2xl border border-border bg-surface p-8 transition hover:-translate-y-0.5 hover:border-foreground"
+                  href="/projects"
+                  className="group block rounded-2xl border border-border bg-surface p-8 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 motion-reduce:transition-none motion-reduce:hover:transform-none"
                 >
                   <p className="text-h3 font-semibold">{project.name}</p>
                   <p className="mt-3 text-body text-muted">{project.description}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </section>
