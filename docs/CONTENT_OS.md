@@ -1,22 +1,26 @@
 # CONTENT_OS.md — операционная система контента
 
 - **Статус:** Canon / SSoT
-- **Версия:** 3.0
-- **Дата:** 2026-08-08
-- **Назначение:** единый процесс от идеи/сигнала до исследования, выбора основного дома, публикации, измерения, обновления и архивации.
+- **Версия:** 3.1
+- **Дата:** 2026-09-18
+- **Назначение:** единый процесс от идеи/сигнала до публикации, измерения, обновления и архивации.
 - **Топология:** `MEDIA_TOPOLOGY.md`
+- **ADR:** `docs/adr/0006-text-first-discovery-triad.md`
 
 ## 1. Главный принцип
 
-Сначала появляется сильная единица знания или наблюдение. Только затем выбираются канал, формат и адаптации.
+Сначала появляется сильная единица мысли, знания или наблюдения. Только затем выбираются слой, формат и канал.
 
 Нельзя создавать контент ради заполнения канала. Нельзя создавать канал ради наличия продукта.
+
+Для короткого авторского text-first контента действует отдельное правило: один исходный текст может одновременно иметь три primary discovery surfaces — Threads, Bluesky и X.
 
 ## 2. Источники
 
 Контент может начинаться из:
 
-- реальной работы;
+- реальной жизни и наблюдений;
+- работы;
 - разработки продукта;
 - кейса;
 - ошибки;
@@ -35,46 +39,62 @@
 - **Editorial** — тематическое объяснение новости/разработки/инструмента.
 - **Campaign** — временный запуск или серия.
 
-Уровень не равен каналу. Один project case может жить в author layer, не требуя отдельной product social surface.
+Уровень не равен каналу.
 
 ## 4. Базовый lifecycle
 
 ```text
 signal / idea
-→ intake
-→ triage
-→ source pack / evidence
-→ thesis
-→ choose primary home
-→ canonical draft
-→ review
-→ adaptations
-→ approval
-→ publish / schedule
+→ capture
+→ decide content level
+→ choose layer
+→ author draft / evidence if needed
+→ publish
+→ conversation / feedback
 → measurement
-→ update / reuse / archive
+→ deepen / reuse / archive
 ```
+
+Для короткого личного поста процесс не должен раздуваться до редакционного pipeline.
 
 ## 5. Triage
 
-Перед созданием материала ответить:
+Перед существенным материалом ответить:
 
-1. Что произошло или что мы узнали?
-2. Для кого это полезно?
-3. Какой один главный результат должен получить читатель?
-4. Это факт, опыт, вывод или гипотеза?
-5. Каков primary home?
-6. Есть ли product relation?
-7. Нужен ли CTA?
-8. Какие secondary adaptations действительно добавляют ценность?
+1. Что произошло или что я хочу сказать?
+2. Это личная мысль, факт, опыт, вывод или гипотеза?
+3. Нужны ли источники?
+4. Это discovery post, deeper Telegram material, canonical site material или editorial content?
+5. Есть ли product relation?
+6. Нужен ли CTA?
+7. Есть ли причина создавать отдельную адаптацию?
 
-## 6. Выбор primary home
+## 6. Выбор слоя
 
-### Author layer
+### Discovery triad
 
-Личный Telegram/сайт и авторские MAX/VK/Instagram — когда ценность строится вокруг опыта, позиции, реальной работы, кейса или интерпретации Максима.
+Threads + Bluesky + X — default для коротких авторских text-first публикаций, где ценность строится вокруг личности, наблюдения, мысли, юмора, мини-истории, разработки или публичного диалога.
 
-Продуктовые кейсы Pro-leads/Tender Audit по умолчанию маршрутизируются сюда или на сайт, а не в отдельный product media channel.
+Один и тот же текст может идти во все три сети без обязательной адаптации.
+
+### Telegram
+
+Relationship / retention layer:
+
+- продолжение короткой мысли;
+- более длинный разбор;
+- несколько мыслей за день;
+- рабочий контекст;
+- архитектура;
+- кейс;
+- исследование;
+- глубокий авторский материал.
+
+Telegram не зеркалирует каждый discovery post.
+
+### Сайт
+
+Долгоживущий материал, исследование, разбор, кейс, canonical article, страница проекта.
 
 ### Тематический канал
 
@@ -82,33 +102,41 @@ signal / idea
 - coding agent / AI development → Разработка с AI;
 - AI service / practical workflow → AI-инструменты.
 
-### Сайт
-
-Долгоживущий материал, исследование, разбор, кейс, canonical article.
-
 ### Product UX
 
-Transactional/support/release information, необходимая пользователю продукта как часть использования, может жить внутри email/bot/Mini App/web/product UI. Это не public editorial content.
+Transactional/support/release information, необходимая пользователю продукта как часть использования, живёт внутри email/bot/Mini App/web/product UI и не считается public editorial content.
 
 ### Product social surface
 
 Не используется как default. Возможна только после Product Social Gate.
 
-## 7. News routing
+## 7. Author authenticity boundary
+
+Личный text-first поток остаётся авторским.
+
+AI/automation могут:
+
+- публиковать один утверждённый текст в несколько targets;
+- добавлять platform metadata;
+- хранить архив;
+- собирать статистику;
+- отслеживать ссылки;
+- помогать искать старые посты.
+
+По умолчанию AI не должен:
+
+- генерировать личную мысль вместо Максима;
+- переписывать каждый пост под каждую сеть;
+- создавать искусственную регулярность;
+- превращать личный блог в контент-фабрику.
+
+## 8. News routing
 
 Чистая новость имеет thematic home.
 
-В author layer она попадает только при добавлении:
+В author layer она попадает только при добавлении собственного опыта, вывода, влияния на архитектуру/бизнес/продукт или проверенного сценария.
 
-- собственного опыта;
-- вывода;
-- влияния на архитектуру/бизнес/продукт;
-- проверенного сценария;
-- позиции Максима.
-
-Механический пересказ не публикуется в author layer.
-
-## 8. Product content
+## 9. Product content
 
 Product material должен иметь:
 
@@ -121,9 +149,7 @@ Product material должен иметь:
 
 Pro-leads и Tender Audit не объединяются в один оффер.
 
-Наличие регулярных product materials само по себе ещё не открывает Product Social Gate.
-
-## 9. Evidence
+## 10. Evidence
 
 Для внешнего факта хранить/проверять:
 
@@ -136,7 +162,7 @@ Pro-leads и Tender Audit не объединяются в один оффер.
 
 Факт, личный опыт, вывод и гипотеза должны быть различимы.
 
-## 10. Canonical content object
+## 11. Canonical content object
 
 ```yaml
 content_id:
@@ -151,7 +177,8 @@ hypotheses: []
 unknowns: []
 primary_thesis:
 content_level:
-primary_channel:
+content_layer: discovery | retention | canonical | editorial | product_ux
+primary_channels: []
 secondary_channels: []
 formats: []
 product_relation: none | pro-leads | tender-audit | future-product
@@ -161,114 +188,95 @@ status:
 sync_state:
 ```
 
-## 11. Adaptation
+`primary_channels` является массивом, потому что короткий author discovery post может одновременно иметь Threads + Bluesky + X как primary surfaces.
+
+## 12. Adaptation и cross-posting
 
 Адаптация может менять:
 
-- заголовок;
 - hook;
 - длину;
 - структуру;
 - контекст;
-- визуальную форму;
 - CTA;
 - степень детализации.
 
 Она не меняет факты и основной смысл.
 
-Запрещён механический cross-posting без отдельной причины.
+По умолчанию механический cross-posting не используется, **кроме discovery triad**. Для Threads + Bluesky + X одинаковый короткий авторский текст допустим как нормальный operating mode.
 
-## 12. Platform roles
+## 13. Platform roles
 
 Канонические роли описаны в `CHANNELS.md`.
 
 Ключевое:
 
-- Telegram Максима — главный author feed;
-- MAX Максима — один author channel;
-- VK/Instagram — существующие author/professional surfaces;
+- Threads + Bluesky + X — text-first discovery layer;
+- Telegram Максима — relationship / retention layer;
+- сайт — owned/canonical layer;
 - три тематических Telegram-канала — editorial network;
-- отдельные product social channels — только после PSG;
-- VC.ru/Дзен/LinkedIn/TenChat/video — адаптированные surfaces по функции.
+- Instagram/VK/MAX/LinkedIn/TenChat/VC.ru/Дзен/video — optional surfaces по доказанной функции;
+- отдельные product social channels — только после PSG.
 
-## 13. Review layers
+## 14. CTA policy
 
-Минимально проверить:
+Для discovery layer:
 
-### Evidence review
+- контент должен иметь самостоятельную ценность;
+- Telegram может быть в профиле постоянно;
+- direct CTA в Telegram используется только при реальном продолжении;
+- CTA не добавляется в каждый пост;
+- несколько конкурирующих CTA запрещены.
 
-- источник существует;
-- цифры и даты совпадают;
-- неизвестное не выдано за факт.
+Для Telegram допустим один релевантный переход на сайт, материал или продукт.
 
-### Editorial review
+## 15. Review и automation
 
-- один тезис;
-- понятная аудитория;
-- нет пустого пересказа;
-- материал соответствует channel promise.
+Режим зависит от типа контента:
 
-### Product review
+- личный короткий post — автор пишет и публикует/утверждает сам;
+- publisher может распространить утверждённый текст в discovery triad;
+- editorial content проходит evidence/editorial review;
+- коммерческий/спорный материал не получает автопубликацию только потому, что publisher технически умеет её делать.
 
-Если есть product relation:
+## 16. Measurement
 
-- не раскрыты private данные;
-- результат не преувеличен;
-- CTA ведёт к правильному продукту;
-- продукты не смешаны.
+Discovery triad измеряется по каждой платформе отдельно:
 
-### Canon review
+- impressions/reach;
+- profile visits;
+- followers;
+- replies/reposts/quotes;
+- качество диалогов;
+- переходы в Telegram;
+- темы, которые повторяемо дают discovery.
 
-- не нарушены `MEDIA_TOPOLOGY`, Product Social Gate, Media Gates и product boundaries.
+Telegram:
 
-## 14. Approval и automation
+- прирост аудитории;
+- возвращаемость;
+- просмотры относительно базы;
+- ответы/реакции/пересылки;
+- переходы на сайт и продукты;
+- качество связи, а не только объём.
 
-Режим определяется Media Gate:
+Системная метрика: растёт ли релевантная аудитория без пропорционального роста production cost.
 
-- manual;
-- agent draft + owner review;
-- approved queue;
-- allowlist auto-publish.
+## 17. Reuse
 
-Коммерческий/авторский/спорный материал не получает право автопубликации только потому, что технически publisher это умеет.
+Сильная единица мысли может пройти путь:
 
-## 15. Measurement
+```text
+короткий discovery post
+→ обсуждение
+→ Telegram continuation
+→ статья / кейс / исследование
+→ продуктовый или репутационный asset
+```
 
-Смотреть прежде всего:
+Не каждый пост обязан пройти весь путь.
 
-- релевантные диалоги;
-- переходы к продуктам;
-- trial/registration/use;
-- сохранения и пересылки;
-- возвраты аудитории;
-- качество комментариев;
-- production cost материала;
-- долю принятых drafts;
-- ошибки/исправления;
-- накопленный reusable knowledge.
-
-Просмотры и лайки — вторичные сигналы.
-
-## 16. Reuse
-
-Сильная единица знания может стать:
-
-- постом;
-- статьёй;
-- кейсом;
-- исследованием;
-- каруселью;
-- reel/short;
-- видео;
-- FAQ;
-- продуктовым объяснением;
-- будущим платным материалом.
-
-Переиспользование не означает копирование одного текста во все каналы.
-
-## 17. Archive / superseded
-
-Старый материал не удаляется только потому, что решение изменилось.
+## 18. Archive / superseded
 
 Использовать статусы:
 
@@ -280,14 +288,14 @@ sync_state:
 
 Для стратегических конфликтов новое решение оформляется ADR/current operating document.
 
-## 18. Stop rules
+## 19. Stop rules
 
-Не производить материал, если:
+Не производить материал или не подключать surface, если:
 
 - нет самостоятельной ценности;
-- источник не проверяется;
-- тезис невозможно сформулировать;
 - публикация существует только ради частоты;
-- материал дублирует другой channel без нового угла;
+- новая сеть требует отдельной редакции без доказанного результата;
 - product CTA приходится приклеивать искусственно;
-- публикация требует создать новую social entity без Product Social Gate.
+- Telegram превращается в зеркало discovery triad;
+- AI начинает заменять личный голос автора;
+- production cost растёт быстрее подтверждённой ценности.
