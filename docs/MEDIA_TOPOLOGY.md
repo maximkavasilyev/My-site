@@ -1,58 +1,64 @@
 # MEDIA_TOPOLOGY.md — текущая топология медиа и продуктовых поверхностей
 
 - **Статус:** Canon / SSoT
-- **Версия:** 1.1
-- **Дата:** 2026-09-18
-- **ADR:** `docs/adr/0004-author-first-media-topology.md`, `docs/adr/0006-text-first-discovery-triad.md`
+- **Версия:** 1.2
+- **Дата:** 2026-09-20
+- **ADR:** `docs/adr/0004-author-first-media-topology.md`, `docs/adr/0007-threads-first-personal-media-and-editorial-autodistribution.md`
 
-Этот документ определяет текущую медиатопологию. При конфликте с прежними формулировками о роли Telegram и внешних text-first площадок приоритет имеют этот документ и ADR 0006.
+Этот документ определяет текущую медиатопологию. ADR 0007 supersedes ADR 0006 в части обязательной `Threads + Bluesky + X` triad как текущего operating default.
 
 ## 1. Главный принцип
 
-> Один авторский источник, несколько слоёв с разной функцией. Discovery не смешивается с retention, retention не превращается в зеркало, а продуктовые social surfaces не создаются без отдельной доказанной функции.
+> Один авторский источник, несколько слоёв с разной функцией. Сейчас основной personal discovery surface — Threads. Retention не превращается в зеркало, а product/editorial surfaces не смешиваются с личным голосом.
 
 Медиа не копирует структуру репозиториев и продуктов один к одному.
 
 ## 2. Авторский контур Максима
 
-### 2.1. Discovery layer
+### 2.1. Threads — primary discovery now
 
-Основной text-first acquisition/discovery layer:
+**Threads** — основной текущий acquisition/discovery layer.
 
-- **Threads**;
-- **Bluesky**;
-- **X (Twitter)**.
-
-Это три независимых социальных графа, но один логический publishing layer.
-
-Один короткий авторский пост может публиковаться на всех трёх площадках практически без изменений. Для этого слоя это осознанное исключение из общего запрета на механический cross-posting.
-
-Цель слоя:
+Цель:
 
 - органическое обнаружение новыми людьми;
-- участие в публичных ветках и ответах;
 - рост личного графа подписчиков;
+- публичные диалоги и replies;
 - тест тем и форматов;
-- перевод части заинтересованной аудитории в Telegram.
+- знакомство с Максимом как с живым автором;
+- перевод части заинтересованной аудитории в личный Telegram.
 
-### 2.2. Telegram
+Характер контента:
+
+- живые мысли и наблюдения;
+- юмор;
+- AI и технологии;
+- новости и реакции;
+- обычная жизнь;
+- странные интернет-находки;
+- эксперименты;
+- вопросы и публичные разговоры.
+
+Threads намеренно не превращается в строгий экспертный канал или контент-конвейер.
+
+### 2.2. Личный Telegram
 
 Личный Telegram Максима — **relationship / retention layer**.
 
 Публикуются:
 
-- продолжения и расширения сильных коротких постов;
+- продолжения сильных коротких постов;
 - более длинные мысли;
-- несколько наблюдений в одной записи;
-- разработка и архитектура;
+- рабочий контекст;
+- архитектура и разработка;
 - AI и агентные системы;
 - предпринимательские выводы;
 - кейсы Pro-leads и Tender Audit;
 - исследования;
 - ошибки, компромиссы и решения;
-- новости только с собственной интерпретацией и последствиями.
+- более глубокий личный контекст.
 
-Telegram не является автоматическим зеркалом Threads/Bluesky/X.
+Telegram не является автоматическим зеркалом Threads.
 
 ### 2.3. Личный сайт
 
@@ -62,45 +68,74 @@ Owned/canonical layer для:
 - исследований;
 - кейсов;
 - страниц проектов;
+- репутационного контента;
 - контекстных CTA на продукты.
 
-### 2.4. Остальные авторские поверхности
+### 2.4. Instagram — next author surface
 
-MAX, VK, Instagram, LinkedIn, TenChat, VC.ru, Дзен, YouTube и другие площадки не входят в обязательный core.
+Instagram не входит в текущий core, пока Threads развивается как главный discovery surface.
 
-Они подключаются только при отдельной доказанной функции.
+После стабилизации Threads Instagram рассматривается как отдельный визуально-профессиональный слой:
 
-Instagram на текущем этапе рассматривается как будущий визуальный слой, а не обязательный text-first канал.
+- более собранный профессиональный образ;
+- визуальные кейсы;
+- продукты и процесс разработки;
+- Reels / карусели;
+- визуальные фрагменты работы и жизни.
 
-Substack Notes, Mastodon и другие text-first сети могут тестироваться позже как дополнительные discovery surfaces, но не добавляются в core автоматически.
+Instagram может вести в личный Telegram, сайт или конкретный продукт. Он не является обязательным промежуточным шагом между Threads и Telegram.
+
+### 2.5. X и Bluesky — optional discovery experiments
+
+X и Bluesky не входят в текущий обязательный publishing core.
+
+Они могут тестироваться через Discovery Surface Gate, если:
+
+- не мешают развитию Threads;
+- дают новую аудиторию;
+- не требуют отдельной редакции;
+- показывают измеримый результат;
+- имеют stop rule.
+
+Не существует обязательного маршрута `X → Threads` или `Bluesky → Threads`.
+
+### 2.6. Остальные author surfaces
+
+MAX, VK, LinkedIn, TenChat, VC.ru, Дзен, YouTube и другие площадки подключаются только при отдельной доказанной функции.
 
 ## 3. Канонический traffic flow
 
+Текущая operating схема:
+
 ```text
-                    Максим
-                      │
-                авторский текст
-                      │
-          ┌───────────┼───────────┐
-          ▼           ▼           ▼
-       Threads     Bluesky     X (Twitter)
-          │           │           │
-          └───────────┼───────────┘
-                      ▼
-                 Telegram
-          relationship / retention
-                      │
-                      ▼
-                 личный сайт
-                      │
-              ┌───────┴────────┐
-              ▼                ▼
-          Pro-leads       Tender Audit
+                 Максим
+                   │
+                   ▼
+                Threads
+          primary discovery now
+                   │
+                   ▼
+           personal Telegram
+        relationship / retention
+                   │
+            ┌──────┴──────┐
+            ▼             ▼
+          site         products
+       canonical      Pro-leads /
+                     Tender Audit
+```
+
+Future / optional author surfaces:
+
+```text
+Instagram ───────────────┐
+X ───────────────────────┼──→ personal Telegram / site / product
+Bluesky ─────────────────┘
 ```
 
 Переход в Telegram не обязан присутствовать в каждом discovery-посте. Пост должен иметь самостоятельную ценность.
 
-## 4. Тематическая Telegram-сеть
+## 4. Тематическая редакционная сеть
 
 Отдельно от авторского контура развиваются три тематических медиа-продукта:
 
@@ -108,22 +143,65 @@ Substack Notes, Mastodon и другие text-first сети могут тест
 2. **Разработка с AI простым языком**;
 3. **AI-инструменты и практические сценарии**.
 
-Они не являются зеркалами личного Threads/Bluesky/X-потока и не являются social pages продуктов.
+Они не являются зеркалами личного Threads-потока и не являются social pages продуктов.
 
-## 5. Разделение контента
+## 5. Editorial autodistribution network
+
+Тематическая редакционная сеть может использовать автопостинг как инфраструктуру распространения уже подготовленного материала.
+
+Базовая схема:
+
+```text
+editorial content object
+        │
+        ▼
+thematic Telegram channel
+        │
+        ▼
+automation / agents
+   ┌────┴────┐
+   ▼         ▼
+Facebook  Pinterest
+```
+
+Facebook и Pinterest — **параллельные distribution endpoints**, а не последовательная пользовательская воронка.
+
+### Facebook
+
+Функция:
+
+- дополнительный reach;
+- long-tail distribution;
+- переиспользование тематического материала без отдельной редакции.
+
+### Pinterest
+
+Функция:
+
+- visual discovery;
+- evergreen traffic;
+- распространение карточек, схем, промптов, before/after, визуальных инструкций и обложек материалов.
+
+Pinterest может вести на сайт, конкретный материал или тематический Telegram — по функции конкретного pin.
+
+Новые autodistribution endpoints добавляются только при доказанной функции и без превращения системы в синтетическую контент-сетку.
+
+## 6. Разделение контента
 
 | Событие | Основной дом | Допустимое продолжение |
 |---|---|---|
-| короткая личная мысль / наблюдение | Threads + Bluesky + X | Telegram при наличии глубины |
-| публичная реакция / спор / ветка | соответствующая discovery platform | Telegram только при самостоятельном выводе |
-| длинная авторская мысль | Telegram / сайт | hook в discovery triad |
-| релиз AI-модели | тематическая сеть | авторский вывод в discovery/Telegram |
-| архитектурное решение | Telegram / сайт | короткая версия в discovery triad |
-| кейс Pro-leads | Telegram / сайт | discovery post + уместный CTA |
-| кейс Tender Audit | Telegram / сайт | discovery post + уместный CTA |
+| короткая личная мысль / наблюдение | Threads | Telegram при наличии глубины |
+| юмор / жизнь / публичная реакция | Threads | без обязательного продолжения |
+| длинная авторская мысль | Telegram / сайт | короткий hook в Threads |
+| визуально-профессиональный кейс | future Instagram / сайт | Telegram или product по контексту |
+| релиз AI-модели | тематическая сеть | авторская реакция в Threads при наличии собственного угла |
+| архитектурное решение | Telegram / сайт | короткая версия в Threads |
+| кейс Pro-leads | Telegram / сайт | Threads post + уместный CTA |
+| кейс Tender Audit | Telegram / сайт | Threads post + уместный CTA |
+| тематический AI-material | тематический Telegram | Facebook / Pinterest autodistribution |
 | transactional/support уведомление | product UX | не является media content |
 
-## 6. Продукты
+## 7. Products
 
 ### Pro-leads
 
@@ -137,7 +215,7 @@ Substack Notes, Mastodon и другие text-first сети могут тест
 
 Отдельные публичные product social accounts не являются default.
 
-## 7. Product Social Gate (PSG)
+## 8. Product Social Gate (PSG)
 
 Новая публичная социальная поверхность продукта появляется только при доказанной самостоятельной функции.
 
@@ -153,20 +231,19 @@ Substack Notes, Mastodon и другие text-first сети могут тест
 
 До прохождения Gate ответ по умолчанию: **не создавать**.
 
-## 8. Discovery Surface Gate
+## 9. Discovery Surface Gate
 
-Новая личная text-first площадка сверх Threads + Bluesky + X подключается только если:
+Новая личная площадка сверх Threads подключается только если:
 
-1. даёт доступ к новой аудитории;
-2. позволяет использовать существующий авторский материал без отдельной редакции;
-3. обладает реальной discovery-механикой, а не только лентой подписок;
-4. не требует заметно увеличивать production cost;
-5. даёт измеримый результат: профильные просмотры, диалоги, подписки или переходы;
-6. имеет понятный stop rule.
+1. не мешает развитию текущего primary surface;
+2. даёт доступ к новой аудитории;
+3. позволяет использовать существующий авторский материал без отдельной редакции или имеет явно доказанную отдельную функцию;
+4. обладает реальной discovery-механикой;
+5. не требует непропорционального роста production cost;
+6. даёт измеримый результат: профильные просмотры, диалоги, подписки или переходы;
+7. имеет понятный stop rule.
 
-Кандидаты вроде Substack Notes или Mastodon тестируются через этот Gate, а не добавляются «для присутствия».
-
-## 9. Legacy publication targets
+## 10. Legacy publication targets
 
 Технически существующие `proleads_ru`, `tenderaudit`, `maxightAI` сохраняются в истории и runtime до отдельной технической миграции.
 
@@ -176,9 +253,9 @@ Substack Notes, Mastodon и другие text-first сети могут тест
 - `tenderaudit` — legacy product media target;
 - `maxightAI` — legacy technical identifier авторского Telegram Максима.
 
-Threads/Bluesky/X пока являются стратегическими surfaces. Их документационное наличие не означает, что publisher/runtime уже подключён.
+X/Bluesky и новые autodistribution targets не считаются подключёнными только потому, что определены в документации. Runtime-реализация — отдельная техническая задача.
 
-## 10. Product UX ≠ media channel
+## 11. Product UX ≠ media channel
 
 Не путать:
 
@@ -187,53 +264,55 @@ Threads/Bluesky/X пока являются стратегическими surfa
 - web app;
 - email-уведомления;
 - support inbox;
-- transactional notifications;
+- transactional notifications
 
 с публичной контентной редакцией.
 
-## 11. Текущая схема
+## 12. Текущая схема
 
 ```text
 Максим
-├── Discovery layer
-│   ├── Threads
-│   ├── Bluesky
-│   └── X (Twitter)
+├── Primary discovery
+│   └── Threads
 │
 ├── Relationship / retention
-│   └── личный Telegram
+│   └── personal Telegram
 │
 ├── Owned / canonical
-│   └── личный сайт
+│   └── personal site
 │
-├── Optional author surfaces
-│   ├── Instagram
+├── Next / optional author surfaces
+│   ├── Instagram — next visual/professional layer
+│   ├── X — optional discovery experiment
+│   ├── Bluesky — optional discovery experiment
 │   ├── VK / MAX
 │   ├── LinkedIn / TenChat
 │   ├── VC.ru / Дзен
-│   ├── video
-│   └── future discovery candidates
+│   └── video
 │
 ├── Editorial network — Telegram
 │   ├── Новости нейросетей
 │   ├── Разработка с AI
 │   └── AI-инструменты
+│       └── autodistribution
+│           ├── Facebook
+│           └── Pinterest
 │
 └── Products
     ├── Pro-leads
     └── Tender Audit
 ```
 
-## 12. Source of truth
+## 13. Source of truth
 
 - последнее явное решение владельца;
 - Notion — стратегия, Gates и операционные решения;
 - `My-site` — versioned media canon;
-- `agents` — технический publication runtime;
+- `agents` — технический publication/autodistribution runtime;
 - продуктовые репозитории — product-specific architecture и distribution boundaries.
 
 Изменение медиа-топологии должно синхронизироваться во всех затронутых слоях, но не должно незаметно менять product runtime.
 
-## 13. Инвариант
+## 14. Инвариант
 
-> Максим пишет один сильный text-first материал. Threads, Bluesky и X распределяют его по независимым discovery-графам. Telegram углубляет отношения. Сайт и продукты образуют owned-слой. Новые поверхности добавляются только после доказанной функции.
+> Сейчас Максим развивает Threads как главный личный discovery surface. Personal Telegram углубляет отношения, сайт хранит канонический слой. Instagram подключается позже как отдельный визуально-профессиональный author surface; X и Bluesky остаются опциональными. Тематическая AI-сетка и её автопостинг в Facebook/Pinterest живут отдельно от личного голоса.
