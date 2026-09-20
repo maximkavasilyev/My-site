@@ -1,11 +1,11 @@
 # CONTENT_OS.md — операционная система контента
 
 - **Статус:** Canon / SSoT
-- **Версия:** 3.1
-- **Дата:** 2026-09-18
+- **Версия:** 3.2
+- **Дата:** 2026-09-20
 - **Назначение:** единый процесс от идеи/сигнала до публикации, измерения, обновления и архивации.
 - **Топология:** `MEDIA_TOPOLOGY.md`
-- **ADR:** `docs/adr/0006-text-first-discovery-triad.md`
+- **ADR:** `docs/adr/0007-threads-first-personal-media-and-editorial-autodistribution.md`
 
 ## 1. Главный принцип
 
@@ -13,7 +13,7 @@
 
 Нельзя создавать контент ради заполнения канала. Нельзя создавать канал ради наличия продукта.
 
-Для короткого авторского text-first контента действует отдельное правило: один исходный текст может одновременно иметь три primary discovery surfaces — Threads, Bluesky и X.
+Для личного короткого контента текущий default — **Threads first**. X и Bluesky не получают материал автоматически только потому, что являются похожими text-first сетями.
 
 ## 2. Источники
 
@@ -64,18 +64,19 @@ signal / idea
 1. Что произошло или что я хочу сказать?
 2. Это личная мысль, факт, опыт, вывод или гипотеза?
 3. Нужны ли источники?
-4. Это discovery post, deeper Telegram material, canonical site material или editorial content?
+4. Это Threads post, deeper Telegram material, canonical site material или editorial content?
 5. Есть ли product relation?
 6. Нужен ли CTA?
 7. Есть ли причина создавать отдельную адаптацию?
+8. Это personal media или editorial media?
 
 ## 6. Выбор слоя
 
-### Discovery triad
+### Threads
 
-Threads + Bluesky + X — default для коротких авторских text-first публикаций, где ценность строится вокруг личности, наблюдения, мысли, юмора, мини-истории, разработки или публичного диалога.
+Current default для коротких авторских публикаций, где ценность строится вокруг личности, наблюдения, мысли, юмора, мини-истории, AI/tech реакции или публичного диалога.
 
-Один и тот же текст может идти во все три сети без обязательной адаптации.
+Threads остаётся живым и реактивным. Не требуется превращать каждый пост в экспертный материал.
 
 ### Telegram
 
@@ -90,11 +91,19 @@ Relationship / retention layer:
 - исследование;
 - глубокий авторский материал.
 
-Telegram не зеркалирует каждый discovery post.
+Telegram не зеркалирует каждый Threads post.
 
-### Сайт
+### Site
 
 Долгоживущий материал, исследование, разбор, кейс, canonical article, страница проекта.
+
+### Instagram
+
+Future visual/professional author layer после стабилизации Threads. Не current default.
+
+### X / Bluesky
+
+Optional discovery experiments по Discovery Surface Gate. Не mandatory cross-post targets.
 
 ### Тематический канал
 
@@ -116,7 +125,7 @@ Transactional/support/release information, необходимая пользов
 
 AI/automation могут:
 
-- публиковать один утверждённый текст в несколько targets;
+- публиковать утверждённый текст;
 - добавлять platform metadata;
 - хранить архив;
 - собирать статистику;
@@ -128,15 +137,39 @@ AI/automation могут:
 - генерировать личную мысль вместо Максима;
 - переписывать каждый пост под каждую сеть;
 - создавать искусственную регулярность;
-- превращать личный блог в контент-фабрику.
+- превращать личный блог в контент-фабрику;
+- автоматически отправлять editorial material в personal Threads.
 
 ## 8. News routing
 
 Чистая новость имеет thematic home.
 
-В author layer она попадает только при добавлении собственного опыта, вывода, влияния на архитектуру/бизнес/продукт или проверенного сценария.
+В personal Threads она может попадать свободнее, чем в прежней строгой модели, если Максим сам считает её интересной и добавляет собственный угол, реакцию, юмор, вопрос или наблюдение.
 
-## 9. Product content
+Для долгоживущего экспертного слоя собственная интерпретация обязательна.
+
+## 9. Editorial autodistribution
+
+Тематический материал после редакционной подготовки может распространяться автоматически:
+
+```text
+editorial content object
+→ thematic Telegram
+→ automation / agents
+→ Facebook / Pinterest / future endpoints
+```
+
+Правила:
+
+- Facebook и Pinterest являются distribution endpoints, а не отдельными редакциями;
+- автопостинг не создаёт новую смысловую единицу из воздуха;
+- формат может адаптироваться технически под endpoint;
+- факты, тезис и смысл не меняются;
+- Pinterest используется преимущественно для visual/evergreen content;
+- Facebook — для дополнительного reach и long-tail distribution;
+- personal Threads не входит в эту сетку по умолчанию.
+
+## 10. Product content
 
 Product material должен иметь:
 
@@ -149,7 +182,7 @@ Product material должен иметь:
 
 Pro-leads и Tender Audit не объединяются в один оффер.
 
-## 10. Evidence
+## 11. Evidence
 
 Для внешнего факта хранить/проверять:
 
@@ -162,7 +195,7 @@ Pro-leads и Tender Audit не объединяются в один оффер.
 
 Факт, личный опыт, вывод и гипотеза должны быть различимы.
 
-## 11. Canonical content object
+## 12. Canonical content object
 
 ```yaml
 content_id:
@@ -180,6 +213,7 @@ content_level:
 content_layer: discovery | retention | canonical | editorial | product_ux
 primary_channels: []
 secondary_channels: []
+auto_distribution_targets: []
 formats: []
 product_relation: none | pro-leads | tender-audit | future-product
 cta:
@@ -188,9 +222,9 @@ status:
 sync_state:
 ```
 
-`primary_channels` является массивом, потому что короткий author discovery post может одновременно иметь Threads + Bluesky + X как primary surfaces.
+`auto_distribution_targets` используется только для материалов, которым реально подходит автоматизированная дистрибуция.
 
-## 12. Adaptation и cross-posting
+## 13. Adaptation и cross-posting
 
 Адаптация может менять:
 
@@ -199,28 +233,34 @@ sync_state:
 - структуру;
 - контекст;
 - CTA;
-- степень детализации.
+- степень детализации;
+- aspect/visual format для Pinterest и других визуальных endpoints.
 
 Она не меняет факты и основной смысл.
 
-По умолчанию механический cross-posting не используется, **кроме discovery triad**. Для Threads + Bluesky + X одинаковый короткий авторский текст допустим как нормальный operating mode.
+Механический cross-posting личного текста во все author surfaces не является default.
 
-## 13. Platform roles
+Autodistribution разрешён для editorial network, если материал уже утверждён и endpoint имеет отдельную функцию.
+
+## 14. Platform roles
 
 Канонические роли описаны в `CHANNELS.md`.
 
 Ключевое:
 
-- Threads + Bluesky + X — text-first discovery layer;
-- Telegram Максима — relationship / retention layer;
-- сайт — owned/canonical layer;
+- Threads — current primary personal discovery;
+- personal Telegram — relationship / retention;
+- site — owned/canonical;
+- Instagram — next visual/professional author layer;
+- X / Bluesky — optional discovery experiments;
 - три тематических Telegram-канала — editorial network;
-- Instagram/VK/MAX/LinkedIn/TenChat/VC.ru/Дзен/video — optional surfaces по доказанной функции;
+- Facebook / Pinterest — automated editorial distribution endpoints;
+- остальные surfaces — по доказанной функции;
 - отдельные product social channels — только после PSG.
 
-## 14. CTA policy
+## 15. CTA policy
 
-Для discovery layer:
+Для Threads:
 
 - контент должен иметь самостоятельную ценность;
 - Telegram может быть в профиле постоянно;
@@ -228,20 +268,23 @@ sync_state:
 - CTA не добавляется в каждый пост;
 - несколько конкурирующих CTA запрещены.
 
+Для Instagram/LinkedIn/TenChat допустим прямой переход на сайт, кейс или продукт, если это естественный destination.
+
 Для Telegram допустим один релевантный переход на сайт, материал или продукт.
 
-## 15. Review и automation
+## 16. Review и automation
 
 Режим зависит от типа контента:
 
-- личный короткий post — автор пишет и публикует/утверждает сам;
-- publisher может распространить утверждённый текст в discovery triad;
+- личный Threads post — автор пишет и публикует/утверждает сам;
+- automation может технически опубликовать уже утверждённый личный материал, но не создаёт голос автора;
 - editorial content проходит evidence/editorial review;
+- approved editorial material может идти в autodistribution endpoints;
 - коммерческий/спорный материал не получает автопубликацию только потому, что publisher технически умеет её делать.
 
-## 16. Measurement
+## 17. Measurement
 
-Discovery triad измеряется по каждой платформе отдельно:
+Threads:
 
 - impressions/reach;
 - profile visits;
@@ -260,23 +303,40 @@ Telegram:
 - переходы на сайт и продукты;
 - качество связи, а не только объём.
 
+Editorial autodistribution:
+
+- incremental reach;
+- outbound clicks;
+- evergreen traffic;
+- production cost;
+- доля материалов, реально подходящих endpoint.
+
 Системная метрика: растёт ли релевантная аудитория без пропорционального роста production cost.
 
-## 17. Reuse
+## 18. Reuse
 
 Сильная единица мысли может пройти путь:
 
 ```text
-короткий discovery post
+Threads post
 → обсуждение
 → Telegram continuation
 → статья / кейс / исследование
 → продуктовый или репутационный asset
 ```
 
-Не каждый пост обязан пройти весь путь.
+Editorial material может пройти другой путь:
 
-## 18. Archive / superseded
+```text
+research / editorial signal
+→ thematic Telegram
+→ Facebook / Pinterest autodistribution
+→ site / canonical asset
+```
+
+Не каждый материал обязан пройти весь путь.
+
+## 19. Archive / superseded
 
 Использовать статусы:
 
@@ -288,7 +348,7 @@ Telegram:
 
 Для стратегических конфликтов новое решение оформляется ADR/current operating document.
 
-## 19. Stop rules
+## 20. Stop rules
 
 Не производить материал или не подключать surface, если:
 
@@ -296,6 +356,7 @@ Telegram:
 - публикация существует только ради частоты;
 - новая сеть требует отдельной редакции без доказанного результата;
 - product CTA приходится приклеивать искусственно;
-- Telegram превращается в зеркало discovery triad;
+- Telegram превращается в зеркало Threads;
 - AI начинает заменять личный голос автора;
+- autodistribution создаёт низкокачественные дубли без трафика или полезной функции;
 - production cost растёт быстрее подтверждённой ценности.
