@@ -1,9 +1,9 @@
 # MEDIA_ARCHITECTURE.md — архитектура персонального медиа
 
 - **Статус:** Canon / SSoT
-- **Версия:** 4.1
-- **Дата:** 2026-09-18
-- **ADR:** `docs/adr/0002-editorial-channel-network.md`, `docs/adr/0004-author-first-media-topology.md`, `docs/adr/0006-text-first-discovery-triad.md`
+- **Версия:** 4.2
+- **Дата:** 2026-09-20
+- **ADR:** `docs/adr/0002-editorial-channel-network.md`, `docs/adr/0004-author-first-media-topology.md`, `docs/adr/0007-threads-first-personal-media-and-editorial-autodistribution.md`
 - **Текущая топология:** `MEDIA_TOPOLOGY.md`
 
 ## 1. Роль медиа
@@ -32,17 +32,15 @@ discovery → relationship/retention → owned/canonical → products
 
 ## 3. Общая схема
 
+Текущий personal flow:
+
 ```text
 реальная жизнь / работа / мысль / наблюдение / product signal
                               ↓
                          Максим пишет
                               ↓
-                 short text-first content
-                              ↓
-       ┌──────────────────────┼──────────────────────┐
-       ▼                      ▼                      ▼
-    Threads                Bluesky                X
-       └──────────────────────┼──────────────────────┘
+                           Threads
+                    primary discovery now
                               ↓
                          Telegram
                   relationship / retention
@@ -53,7 +51,16 @@ discovery → relationship/retention → owned/canonical → products
                   products / reputation
 ```
 
-Параллельно существует отдельная тематическая Telegram-сеть, которая не является продолжением личного discovery feed.
+Future / optional author surfaces подключаются параллельно, а не как обязательные ступени:
+
+```text
+Instagram ───────────────┐
+X ───────────────────────┼──→ Telegram / site / product
+Bluesky ─────────────────┘
+LinkedIn / TenChat ──────→ site / case / product / Telegram
+```
+
+Параллельно существует отдельная тематическая Telegram-сеть и её autodistribution layer.
 
 ## 4. Author layer
 
@@ -61,17 +68,26 @@ discovery → relationship/retention → owned/canonical → products
 
 Максим остаётся источником личного текста.
 
-AI/automation могут обслуживать инфраструктуру: публикацию, архив, ссылки, метрики и поиск по истории. Они не заменяют личный голос автора по умолчанию.
+AI/automation могут обслуживать инфраструктуру: публикацию утверждённого материала, архив, ссылки, метрики и поиск по истории. Они не заменяют личный голос автора по умолчанию.
 
-### 4.2. Discovery triad
+### 4.2. Threads — primary discovery surface
 
-**Threads + Bluesky + X (Twitter)** — основной acquisition/discovery layer.
+Threads — основной текущий acquisition/discovery layer.
 
-Причина выбора — их публичная conversational модель: короткие посты, ответы, ветки, репосты/цитирование и возможность быть обнаруженным вне существующей базы подписчиков.
+Причина выбора — уже существующий органический рост и публичная conversational-модель: короткие посты, ответы, ветки, репосты/цитирование и discovery вне существующей базы подписчиков.
 
-Один короткий пост может публиковаться на всех трёх площадках практически без изменений.
+Threads намеренно остаётся живым, реактивным и человеческим. Его роль включает:
 
-Это один publishing layer, а не три редакции.
+- юмор;
+- жизнь;
+- AI и технологии;
+- новости и реакции;
+- наблюдения;
+- вопросы аудитории;
+- эксперименты;
+- публичные диалоги.
+
+Он не превращается в строгий экспертный блог или автоматизированную контент-фабрику.
 
 ### 4.3. Личный Telegram
 
@@ -85,19 +101,36 @@ Telegram — relationship / retention layer:
 - исследования;
 - более глубокая связь с аудиторией.
 
-Telegram не становится автоматическим зеркалом discovery triad.
+Telegram не становится автоматическим зеркалом Threads.
 
 ### 4.4. Личный сайт
 
 Канонический owned-слой для долгоживущего контента, исследований, страниц проектов и контекстных переходов к продуктам.
 
-### 4.5. Optional surfaces
+### 4.5. Instagram
 
-Instagram, VK, MAX, LinkedIn, TenChat, VC.ru, Дзен, YouTube и другие площадки не входят в обязательный ежедневный core.
+Instagram — next author surface после стабилизации Threads, но не current core.
 
-Instagram рассматривается как будущий визуальный слой.
+Функция:
 
-Substack Notes, Mastodon и другие text-first сети могут тестироваться через отдельный Discovery Surface Gate после стабилизации основной triad.
+- более собранный профессиональный образ;
+- визуальные кейсы;
+- процесс разработки;
+- Reels / карусели;
+- визуальные фрагменты жизни и работы;
+- переходы в Telegram, сайт или продукт по контексту.
+
+Instagram не обязан быть копией Threads и не является обязательным промежуточным слоем.
+
+### 4.6. X и Bluesky
+
+X и Bluesky — optional discovery experiments, а не текущий publishing default.
+
+Они подключаются по Discovery Surface Gate после стабилизации Threads, если дают отдельный discovery-result без непропорционального роста нагрузки.
+
+### 4.7. Other professional / optional surfaces
+
+LinkedIn, TenChat, VK, MAX, VC.ru, Дзен, YouTube и другие площадки подключаются только по отдельной функции.
 
 ## 5. Тематическая редакционная сеть
 
@@ -107,33 +140,56 @@ Substack Notes, Mastodon и другие text-first сети могут тест
 2. **Разработка с AI простым языком**;
 3. **AI-инструменты и практическое применение**.
 
-Они имеют отдельные ожидания аудитории и не зеркалируют Threads/Bluesky/X Максима.
+Они имеют отдельные ожидания аудитории и не зеркалируют личный Threads Максима.
 
 Подробный operating contract: `EDITORIAL_NETWORK.md`.
 
-## 6. Discovery Surface Gate
+## 6. Editorial autodistribution
 
-Новая личная text-first платформа добавляется только если:
+Редакционный контур может автоматически распространять уже созданный тематический материал в дополнительные surfaces.
 
-1. даёт новую аудиторию;
-2. позволяет переиспользовать исходный авторский пост без новой редакции;
-3. имеет реальную discovery/conversation механику;
-4. не увеличивает production cost непропорционально;
-5. даёт измеримый результат;
-6. имеет stop rule.
+```text
+editorial content object
+        ↓
+thematic Telegram
+        ↓
+automation / agents
+   ┌────┴────┐
+   ↓         ↓
+Facebook  Pinterest
+```
 
-Это защищает систему от бесконечного добавления соцсетей.
+Роли:
 
-## 7. Продукты
+- **Facebook** — дополнительный reach / long-tail distribution;
+- **Pinterest** — visual discovery / evergreen traffic.
+
+Они являются параллельными distribution endpoints, а не последовательной воронкой.
+
+Personal Threads не включается в эту автоматизированную сеть по умолчанию.
+
+## 7. Discovery Surface Gate
+
+Новая личная discovery-платформа сверх Threads добавляется только если:
+
+1. не мешает развитию текущего primary surface;
+2. даёт новую аудиторию;
+3. позволяет переиспользовать исходный авторский материал без отдельной редакции или имеет отдельную доказанную функцию;
+4. имеет реальную discovery/conversation механику;
+5. не увеличивает production cost непропорционально;
+6. даёт измеримый результат;
+7. имеет stop rule.
+
+## 8. Products
 
 ### Pro-leads
 
 Самостоятельный B2B-продукт со своим runtime/data/auth/billing/deploy/product UX.
 
-Публичный путь:
+Публичный путь может быть:
 
 ```text
-Threads / Bluesky / X
+Threads / future Instagram / professional surfaces
 → Telegram / site
 → Pro-leads
 ```
@@ -144,36 +200,38 @@ Threads / Bluesky / X
 
 Самостоятельный B2B-продукт со своим runtime/data/auth/billing/deploy/product UX.
 
-Публичный путь:
+Публичный путь может быть:
 
 ```text
-Threads / Bluesky / X
+Threads / future Instagram / professional surfaces
 → Telegram / site
 → Tender Audit
 ```
 
 MAX Bot/Mini App и web Tender Audit — product UX, а не публичная редакция.
 
-## 8. Product Social Gate
+## 9. Product Social Gate
 
 Отдельная публичная social surface продукта появляется только при доказанной самостоятельной аудитории, отдельной функции и устойчивом product-specific content flow.
 
 Критерии и stop rules: `MEDIA_TOPOLOGY.md` / ADR 0004.
 
-## 9. CTA architecture
+## 10. CTA architecture
 
 Discovery layer не превращается в рекламную воронку.
 
 Правила:
 
 - короткий пост должен быть ценен сам по себе;
-- Telegram можно держать в профилях постоянно;
+- Telegram можно держать в профиле Threads постоянно;
 - прямой CTA в Telegram используется только при наличии дополнительной ценности;
 - не каждый пост содержит CTA;
+- Instagram/LinkedIn/TenChat могут вести сразу на сайт, кейс или продукт, если это естественный destination;
 - Telegram ведёт дальше максимум к одному релевантному материалу или продукту;
-- конкурирующие CTA запрещены.
+- конкурирующие CTA запрещены;
+- не строить искусственную цепочку через несколько соцсетей.
 
-## 10. Content model
+## 11. Content model
 
 Стратегические форматы:
 
@@ -187,11 +245,12 @@ Discovery layer не превращается в рекламную воронк
 - reel;
 - short;
 - long-video;
-- carousel.
+- carousel;
+- visual card / pin.
 
 Текущий renderer сайта может иметь более узкий технический контракт; это не ограничивает редакционный словарь.
 
-## 11. Content object
+## 12. Content object
 
 Существенный материал содержит:
 
@@ -209,28 +268,30 @@ Discovery layer не превращается в рекламную воронк
 - review state;
 - sync-state.
 
-Для discovery post допустимо несколько primary channels: Threads + Bluesky + X.
+Editorial content object также может иметь automated distribution targets.
 
-## 12. Производственная модель
+## 13. Производственная модель
 
-Личный text-first контент не обязан выходить по жёсткому графику.
+Личный Threads-контент не обязан выходить по жёсткому графику.
 
 Базовая модель:
 
 ```text
-Максим написал один пост
+Максим написал пост
 → ручное утверждение самим автором
-→ публикация в Threads + Bluesky + X
+→ публикация в Threads
 → ответы / ветки / разговор
 → при наличии глубины продолжение в Telegram
 → при долгом сроке жизни материал на сайт
 ```
 
+Instagram, X и Bluesky не получают публикацию автоматически только потому, что существуют.
+
 Техническая автоматизация publisher не является условием запуска модели.
 
-## 13. Measurement
+## 14. Measurement
 
-По discovery triad измеряются отдельно:
+Для Threads измеряются:
 
 - reach/impressions;
 - profile visits;
@@ -240,13 +301,23 @@ Discovery layer не превращается в рекламную воронк
 - переходы в Telegram;
 - повторяемость сильных тем.
 
+Для optional discovery surfaces метрики считаются отдельно.
+
+Для editorial autodistribution:
+
+- дополнительный reach;
+- outbound clicks;
+- evergreen traffic;
+- production cost;
+- доля материалов, которые реально подходят endpoint.
+
 На уровне системы:
 
 - растёт ли релевантная аудитория;
-- конвертируется ли часть discovery-аудитории в Telegram;
+- конвертируется ли часть discovery-аудитории в Telegram / site / products;
 - растёт ли ценность без пропорционального роста production cost.
 
-## 14. Legacy publication targets
+## 15. Legacy publication targets
 
 До отдельной технической миграции в `agents` могут существовать:
 
@@ -256,24 +327,27 @@ Discovery layer не превращается в рекламную воронк
 
 Runtime-факт не переопределяет media strategy.
 
-Threads/Bluesky/X в документации не означают, что publication targets уже реализованы технически.
+X/Bluesky/Facebook/Pinterest в документации не означают, что publication targets уже реализованы технически.
 
-## 15. Sync
+## 16. Sync
 
 - Notion — стратегия, решения владельца, Gates, backlog, аналитика и статусы;
 - GitHub — versioned canon, ADR, agent instructions, schemas и code;
-- `agents` — publication/workflow runtime;
+- `agents` — publication/autodistribution runtime;
 - product repos — product-specific technical/product truth.
 
 Подробности: `MEDIA_SYNC.md`.
 
-## 16. Инварианты
+## 17. Инварианты
 
 - Максим остаётся источником личного текста;
-- Threads + Bluesky + X — один discovery layer, а не три редакции;
-- Telegram не зеркалит discovery triad;
+- Threads — текущий primary personal discovery surface;
+- Telegram не зеркалит Threads;
 - сайт остаётся owned/canonical layer;
-- тематическая сеть не превращается в копии личного блога;
+- Instagram подключается позже с отдельной визуально-профессиональной функцией;
+- X/Bluesky не входят в current core автоматически;
+- тематическая сеть не превращается в копию личного блога;
+- Facebook/Pinterest — automated editorial distribution endpoints, а не personal voice surfaces;
 - product runtime не смешивается с media runtime;
 - public product social не создаётся без Gate;
 - дополнительные сети не добавляются ради присутствия.
