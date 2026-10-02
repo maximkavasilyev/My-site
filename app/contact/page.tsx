@@ -55,7 +55,7 @@ export default async function Contact() {
 
       <main id="main-content" className="flex-1 bg-background text-foreground">
         <ScrollReveal>
-          <section className="mx-auto max-w-5xl px-6 py-24 sm:px-10 sm:py-32">
+          <section className="mx-auto max-w-6xl px-6 py-24 sm:px-10 sm:py-32">
             <h1 className="font-serif text-h1 font-semibold leading-tight tracking-tight">
               {title}
             </h1>

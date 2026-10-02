@@ -3,10 +3,9 @@ import { PROJECT_URLS } from "@/lib/projects";
 export default function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-10">
         <div>
-          <p className="text-body font-semibold tracking-tight">Максим</p>
-          <p className="mt-1 text-small text-muted">
+          <p className="text-small text-muted">
             Разработчик, архитектор систем, AI-специалист
           </p>
         </div>

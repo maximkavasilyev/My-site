@@ -107,7 +107,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
   // markdown-заголовок в теле дублирует frontmatter title — рендерим title отдельно, убираем из тела.
   // gray-matter оставляет ведущие пустые строки перед `#`, поэтому trimStart() обязателен для ^-якоря.
-  const body = content.trimStart().replace(/^#\s+.+\n+/, "").trimEnd();
+  const body = content.trimStart().replace(/^#\s+.+(?:\r?\n)+/, "").trimEnd();
 
   const processed = await remark().use(html).process(body);
 
