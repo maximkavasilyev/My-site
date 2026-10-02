@@ -8,6 +8,26 @@ const pages = [
   { path: "/contact/", title: /Контакты/ },
 ];
 
+test("входы главной ведут к подборке и проектам", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("main").getByRole("link", { name: "Для создателей", exact: true }).click();
+  await expect(page).toHaveURL(/\/#start$/);
+  await expect(page.getByRole("heading", { name: "С чего начать", exact: true })).toBeInViewport();
+  await page.locator("main").getByRole("link", { name: "Для бизнеса", exact: true }).click();
+  await expect(page).toHaveURL(/\/projects\/$/);
+});
+
+test("карточки главной ведут к секциям соответствующих продуктов", async ({ page }) => {
+  for (const [name, slug] of [["Pro-leads", "pro-leads"], ["Tender Audit", "tender-audit"]]) {
+    await page.goto("/");
+    const link = page.locator("main").getByRole("link", { name: new RegExp(`^${name}`) });
+    await expect(link).toHaveAttribute("href", `/projects/#${slug}`);
+    await link.click();
+    await expect(page).toHaveURL(new RegExp(`/projects/#${slug}$`));
+    await expect(page.locator(`#${slug}`).getByRole("heading", { name, exact: true })).toBeInViewport();
+  }
+});
+
 for (const { path, title } of pages) {
   test(`${path} отдаёт 200 и правильный title`, async ({ page }) => {
     const response = await page.goto(path);

@@ -8,7 +8,7 @@ export default function NotFound() {
       <Header />
 
       <main id="main-content" className="flex-1 bg-background text-foreground">
-        <section className="mx-auto max-w-5xl px-6 py-24 sm:px-10 sm:py-32">
+        <section className="mx-auto max-w-6xl px-6 py-24 sm:px-10 sm:py-32">
           <p className="text-small uppercase tracking-widest text-muted">404</p>
 
           <h1 className="mt-6 font-serif text-h1 font-semibold leading-tight tracking-tight">

@@ -25,7 +25,7 @@ export default function ScrollReveal({
           observer.disconnect();
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0 },
     );
 
     observer.observe(node);

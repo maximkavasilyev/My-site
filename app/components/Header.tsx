@@ -62,9 +62,15 @@ export default function Header() {
 
   return (
     <header className="relative z-50 border-b border-border">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 sm:px-10">
-        <Link href="/" className="text-body font-semibold tracking-tight">
-          Максим
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10">
+        <Link href="/" className="flex items-center">
+          <img
+            src="/brand/maxightai-mark.png"
+            alt="MaxightAI"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full object-cover"
+          />
         </Link>
 
         <nav className="hidden gap-6 text-small text-muted sm:flex">
@@ -103,8 +109,16 @@ export default function Header() {
           id={MOBILE_NAV_ID}
           className="mobile-nav-enter fixed inset-0 z-40 flex flex-col bg-background sm:hidden"
         >
-          <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
-            <span className="text-body font-semibold tracking-tight">Максим</span>
+          <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+            <span aria-hidden="true" className="flex items-center">
+              <img
+                src="/brand/maxightai-mark.png"
+                alt=""
+                width={34}
+                height={34}
+                className="h-8 w-8 rounded-full object-cover"
+              />
+            </span>
             <button
               type="button"
               className="flex h-9 w-9 items-center justify-center"

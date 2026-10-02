@@ -15,6 +15,7 @@ test("sitemap.xml валиден и содержит все посты", async (
   const body = await res.text();
   expect(body).toContain("<urlset");
   expect(body).toContain("/blog/suppliers-lose-before-submission/");
+  expect(body).toContain("/blog/static-site-with-markdown/");
 });
 
 test("rss.xml валиден, содержит все посты, экранирован", async ({ request }) => {
@@ -24,6 +25,7 @@ test("rss.xml валиден, содержит все посты, экранир
   expect(body).toContain("<rss version=\"2.0\"");
   const itemCount = (body.match(/<item>/g) ?? []).length;
   expect(itemCount).toBe(getAllPosts().length);
+  expect(body).toContain("/blog/static-site-with-markdown/");
 });
 
 test("og:image присутствует на Главной и на посте, указывает на разные картинки", async ({

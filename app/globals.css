@@ -92,6 +92,7 @@ html[data-js="true"] .reveal.is-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html[data-js="true"] .reveal,
   .reveal {
     opacity: 1;
     transform: none;
@@ -110,6 +111,10 @@ html[data-js="true"] .reveal.is-visible {
 
 .prose > :first-child {
   margin-top: 0;
+}
+
+.prose pre {
+  overflow-x: auto;
 }
 
 .prose p {

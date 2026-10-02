@@ -19,7 +19,7 @@ export default function Blog() {
 
       <main id="main-content" className="flex-1 bg-background text-foreground">
         <ScrollReveal>
-          <section className="mx-auto max-w-5xl px-6 py-24 sm:px-10 sm:py-32">
+          <section className="mx-auto max-w-6xl px-6 py-24 sm:px-10 sm:py-32">
             <h1 className="font-serif text-h1 font-semibold leading-tight tracking-tight">
               Блог
             </h1>
@@ -27,7 +27,7 @@ export default function Blog() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <section className="mx-auto max-w-5xl border-t border-border px-6 py-20 sm:px-10">
+          <section className="mx-auto max-w-6xl border-t border-border px-6 py-20 sm:px-10">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
                 <PostCard key={post.slug} post={post} />
